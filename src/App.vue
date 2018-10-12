@@ -3,15 +3,7 @@
 </template>
 
 <script>
-import Header from "./components/layout/Header.vue";
-import Footer from "./components/layout/Footer.vue";
-
-export default {
-  components: {
-    appFooter: Footer,
-    appHeader: Header
-  }
-};
+export default {};
 </script>
 
 <style>
