@@ -28,8 +28,6 @@
         dismissible>
       {{ discriminationMessage }}
     </v-alert>
-
-    <v-switch :label="'Advanced Form'" v-model="advancedToggle"></v-switch>
   </header>
 </template>
 
