@@ -53,17 +53,19 @@
 
           <!-- Third Row -->
           <v-flex xs6 sm6>
-            <v-text-field
+            <app-date-dialog
               label="Start Date"
-              v-model="jobs[index].startDate">
-            </v-text-field>
+              v-model="jobs[index].startDate"
+            >
+            </app-date-dialog>
           </v-flex>
 
           <v-flex xs6 sm6>
-            <v-text-field
+            <app-date-dialog
               label="End Date"
-              v-model="jobs[index].endDate">
-            </v-text-field>
+              v-model="jobs[index].endDate"
+            >
+            </app-date-dialog>
           </v-flex>
 
           <!-- Fourth Row -->
@@ -100,6 +102,7 @@
 
 <script>
 import Card from "../../shared/Card.vue";
+import DateDialog from "../../shared/DateDialog.vue";
 import AddBlockButton from "../../shared/AddBlockButton.vue";
 
 export default {
@@ -130,7 +133,8 @@ export default {
   },
   components: {
     appCard: Card,
-    appAddBlockButton: AddBlockButton
+    appAddBlockButton: AddBlockButton,
+    appDateDialog: DateDialog
   }
 };
 </script>

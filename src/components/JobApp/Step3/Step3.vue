@@ -16,10 +16,10 @@
       </v-flex>
 
       <v-flex xs4 class="my-2">
-        <v-text-field
+        <app-date-dialog
           label="Date of Signature"
           v-model="signatureDate"  
-        ></v-text-field>
+        ></app-date-dialog>
       </v-flex>
     </v-layout>
 
@@ -28,6 +28,7 @@
 
 <script>
 import ApplicantAgreement from "./ApplicantAgreement/ApplicantAgreement.vue";
+import DateDialog from "../shared/DateDialog.vue";
 
 export default {
   data() {
@@ -37,7 +38,8 @@ export default {
     };
   },
   components: {
-    ApplicantAgreement
+    ApplicantAgreement,
+    appDateDialog: DateDialog
   }
 };
 </script>

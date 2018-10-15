@@ -16,7 +16,7 @@ import Card from "../../shared/Card.vue";
 
 export default {
   components: {
-    appCard: Card
+    appCard: Card,
   }
 };
 </script>
