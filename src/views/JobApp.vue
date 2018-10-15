@@ -16,7 +16,7 @@ export default {
   components: {
     appHeader: Header,
     appFooter: Footer,
-    appJobNav: JobNav,
+    appJobNav: JobNav
   }
 };
 </script>

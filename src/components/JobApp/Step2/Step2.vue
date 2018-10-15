@@ -2,19 +2,23 @@
   <div>
     <high-school-form></high-school-form>
     <undergrad-school-form></undergrad-school-form>
-    <continue-button toStep="3"></continue-button>
+    <past-employment-form></past-employment-form>
+    <references-form></references-form>
   </div>
  </template>
 
 <script>
 import HighSchoolForm from "./HighSchoolForm.vue";
-import UndergradSchoolForm from "./UndergradSchoolForm.vue";
-import ContinueButton from "../shared/ContinueButton.vue";
+import UndergradSchoolForm from "./UndergradSchoolForm/UndergradSchoolForm.vue";
+import PastEmploymentForm from "./PastEmploymentForm/PastEmploymentForm.vue";
+import ReferencesForm from "./ReferencesForm/ReferencesForm.vue";
+
 export default {
   components: {
     HighSchoolForm,
     UndergradSchoolForm,
-    ContinueButton
+    PastEmploymentForm,
+    ReferencesForm
   }
 };
 </script>

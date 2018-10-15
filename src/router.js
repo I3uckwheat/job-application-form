@@ -4,6 +4,7 @@ import Router from "vue-router";
 import JobApp from "./views/JobApp.vue";
 import JobAppStep1 from "./components/JobApp/Step1/Step1.vue";
 import JobAppStep2 from "./components/JobApp/Step2/Step2.vue";
+import JobAppStep3 from "./components/JobApp/Step3/Step3.vue";
 
 Vue.use(Router);
 
@@ -25,6 +26,11 @@ export default new Router({
           path: "step2",
           name: "step2",
           component: JobAppStep2
+        },
+        {
+          path: "step3",
+          name: "step3",
+          component: JobAppStep3
         }
       ]
     }
