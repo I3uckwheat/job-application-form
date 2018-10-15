@@ -3,7 +3,8 @@
     <h2 slot="title">Past Employment</h2>
 
     <template v-for="(job, index) in jobs">
-      <div :key="index" :class="{spaced: index !== jobs.length - 1}">
+      <div :key="index" :class="{spaced: index !== jobs.length - 1}" class="layout-wrapper">
+        <h3>Employer {{ index + 1 }}</h3>
         <v-layout row wrap justify-space-between> 
 
           <!-- Top row -->

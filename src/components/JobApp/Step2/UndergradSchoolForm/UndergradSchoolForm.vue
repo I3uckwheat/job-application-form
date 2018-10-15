@@ -4,6 +4,7 @@
 
       <template v-for="(school, index) in schools">
         <div :key="index" :class="{spaced: index !== schools.length - 1}">
+          <h3>School {{ index + 1 }}</h3>
           <v-layout row wrap justify-space-between> 
             <!-- Row One -->
             <v-flex xs12 sm6>
