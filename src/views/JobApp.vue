@@ -1,8 +1,9 @@
 <template>
   <v-app>
     <app-header></app-header> 
-      <app-job-nav></app-job-nav>  
+    <app-job-nav class="mx-3 my-2">
       <router-view></router-view>
+    </app-job-nav>  
     <app-footer></app-footer>
   </v-app>
 </template>

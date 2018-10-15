@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <v-flex xs12>
       <applicant-agreement></applicant-agreement>
     </v-flex>
 
-    <v-layout>
-      <v-flex xs8>
+    <v-layout class="mx-4">
+      <v-flex xs8 class="my-2">
         <v-text-field
           v-model="applicantSignature"
           label="Signature of Applicant"
@@ -15,8 +15,8 @@
         </v-text-field>
       </v-flex>
 
-      <v-flex xs4>
-        <v-text-field 
+      <v-flex xs4 class="my-2">
+        <v-text-field
           label="Date of Signature"
           v-model="signatureDate"  
         ></v-text-field>
@@ -42,5 +42,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.container {
+  padding-bottom: 10px;
+}
 </style>
