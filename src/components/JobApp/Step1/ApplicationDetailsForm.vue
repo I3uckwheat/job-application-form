@@ -15,6 +15,7 @@
       </v-text-field>
     </v-flex>
 
+  <v-layout>
     <v-flex xs12 sm4>
       <app-date-dialog 
         label="Date Available for Work" 
@@ -24,9 +25,26 @@
 
     <v-flex xs12 sm4>
       <v-text-field
-        label="Desired Salary Range">
+        label="Desired Salary Range"
+        prefix="$">
       </v-text-field>
     </v-flex>
+  </v-layout>
+
+  <v-layout justify-start>
+    <v-flex xs2>
+      <v-checkbox v-model="availability" label="Full-Time" value="full"></v-checkbox>
+    </v-flex>
+
+    <v-flex xs2>
+      <v-checkbox v-model="availability" label="Part-Time" value="part"></v-checkbox>
+    </v-flex>
+
+    <v-flex xs2>
+      <v-checkbox v-model="availability" label="Temporary" value="temp"></v-checkbox>
+    </v-flex>
+  </v-layout>
+
 
   </app-card>
 </template>
@@ -39,7 +57,8 @@ export default {
   data() {
     return {
       applicationDate: '',
-      dateAvailable: ''
+      dateAvailable: '',
+      avilability: []
     }
   },
   components: {
