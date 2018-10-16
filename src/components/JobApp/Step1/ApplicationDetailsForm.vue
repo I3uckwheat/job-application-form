@@ -31,6 +31,7 @@
     </v-flex>
   </v-layout>
 
+  <h4>Are you available to work:</h4>
   <v-layout justify-start>
     <v-flex xs2>
       <v-checkbox v-model="availability" label="Full-Time" value="full"></v-checkbox>
