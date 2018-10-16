@@ -57,10 +57,10 @@ import DateDialog from "../shared/DateDialog.vue";
 export default {
   data() {
     return {
-      applicationDate: '',
-      dateAvailable: '',
+      applicationDate: "",
+      dateAvailable: "",
       avilability: []
-    }
+    };
   },
   components: {
     appCard: Card,

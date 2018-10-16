@@ -16,7 +16,7 @@
 <script>
 import ContinueButton from "./ContinueButton.vue";
 import BackButton from "./BackButton.vue";
-import FinishButton from "./FinishButton.vue"
+import FinishButton from "./FinishButton.vue";
 
 export default {
   components: {

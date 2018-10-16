@@ -28,21 +28,20 @@ export default {
   data() {
     return {
       modal: false,
-      date: ''
-    }
+      date: ""
+    };
   },
   created() {
     this.date = this.value;
   },
   watch: {
     date() {
-      this.$emit('input', this.date)  
+      this.$emit("input", this.date);
     }
   },
-  props: ["label", "value"],
-}
+  props: ["label", "value"]
+};
 </script>
 
 <style>
-
 </style>
