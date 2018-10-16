@@ -8,7 +8,9 @@
         <v-text-field
           v-model="lastName"
           :rules="existsRule('Last Name')"
-          label="Last Name">
+          label="Last Name"
+          validate-on-blur
+          >
         </v-text-field>
       </v-flex>
 
@@ -16,7 +18,9 @@
         <v-text-field
           v-model="firstName"
           label="First Name"
-          :rules="existsRule('First Name')">
+          :rules="existsRule('First Name')"
+          validate-on-blur
+          >
         </v-text-field>
       </v-flex>
 
@@ -30,14 +34,18 @@
       <v-flex xs12 sm4>
         <v-text-field
           label="Address"
-          :rules="existsRule('Address')">
+          :rules="existsRule('Address')"
+          validate-on-blur
+          >
         </v-text-field>
       </v-flex>
 
       <v-flex xs12 sm3>
         <v-text-field
           label="City"
-          :rules="existsRule('City')">
+          :rules="existsRule('City')"
+          validate-on-blur
+          >
         </v-text-field>
       </v-flex>
 
@@ -45,6 +53,7 @@
         <v-autocomplete
           v-model="applicantState"
           :rules="existsRule('State')"
+          validate-on-blur
           :items="states"
           label="State"
         >
@@ -60,6 +69,7 @@
         <v-text-field
           v-model="zipCode"
           :rules="existsRule('Zip Code')"
+          validate-on-blur
           label="Zip Code"
           mask="#####">
         </v-text-field>
@@ -72,7 +82,8 @@
           <v-flex xs12 sm5>
             <v-text-field
               v-model="phoneNumber"
-              :rules="existsRule('Phone Number')"
+              :rules="phoneNumberRules"
+              validate-on-blur
               label="Phone Number"
               prepend-icon="phone"
               mask="phone">
@@ -93,7 +104,9 @@
         <h4>Are you able to work in the US?</h4>
         <v-radio-group
         v-model="ableToWorkInUS"
-        :rules="existsRule('This')">
+        :rules="existsRule('This')"
+        validate-on-blur
+        >
           <v-layout justify-strt>
             <v-flex xs2>
               <v-radio
@@ -119,7 +132,7 @@
 
 <script>
 import Card from "../shared/Card.vue";
-import validatorMixin from "../../../mixins/validatorMixin"
+import validatorMixin from "../../../mixins/validatorMixin";
 
 export default {
   data() {
@@ -132,6 +145,9 @@ export default {
       state: "",
       zipCode: "",
       phoneNumber: "",
+      phoneNumberRules: [
+        v => v.length === 10 || "10 digit phone number is required"
+      ],
       emailAddress: "",
       applicantState: "",
       ableToWorkInUS: null,
@@ -203,7 +219,7 @@ export default {
     appCard: Card
   },
   mixins: [validatorMixin]
-}
+};
 </script>
 
 <style>
