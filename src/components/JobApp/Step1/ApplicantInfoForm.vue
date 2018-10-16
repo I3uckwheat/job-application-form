@@ -6,13 +6,17 @@
       <!-- Row One -->
       <v-flex xs12 sm4>
         <v-text-field
+          v-model="lastName"
+          :rules="existsRule('Last Name')"
           label="Last Name">
         </v-text-field>
       </v-flex>
 
       <v-flex xs12 sm4>
         <v-text-field
-          label="First Name">
+          v-model="firstName"
+          label="First Name"
+          :rules="existsRule('First Name')">
         </v-text-field>
       </v-flex>
 
@@ -25,19 +29,22 @@
       <!-- Row Two -->
       <v-flex xs12 sm4>
         <v-text-field
-          label="Address">
+          label="Address"
+          :rules="existsRule('Address')">
         </v-text-field>
       </v-flex>
 
       <v-flex xs12 sm3>
         <v-text-field
-          label="City">
+          label="City"
+          :rules="existsRule('City')">
         </v-text-field>
       </v-flex>
 
       <v-flex xs12 sm2>
         <v-autocomplete
           v-model="applicantState"
+          :rules="existsRule('State')"
           :items="states"
           label="State"
         >
@@ -51,6 +58,8 @@
 
       <v-flex xs12 sm2>
         <v-text-field
+          v-model="zipCode"
+          :rules="existsRule('Zip Code')"
           label="Zip Code"
           mask="#####">
         </v-text-field>
@@ -62,6 +71,8 @@
           
           <v-flex xs12 sm5>
             <v-text-field
+              v-model="phoneNumber"
+              :rules="existsRule('Phone Number')"
               label="Phone Number"
               prepend-icon="phone"
               mask="phone">
@@ -81,7 +92,8 @@
       <v-flex xs11>
         <h4>Are you able to work in the US?</h4>
         <v-radio-group
-        v-model="ableToWorkInUS">
+        v-model="ableToWorkInUS"
+        :rules="existsRule('This')">
           <v-layout justify-strt>
             <v-flex xs2>
               <v-radio
@@ -107,10 +119,20 @@
 
 <script>
 import Card from "../shared/Card.vue";
+import validatorMixin from "../../../mixins/validatorMixin"
 
 export default {
   data() {
     return {
+      lastName: "",
+      firstName: "",
+      middleName: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      phoneNumber: "",
+      emailAddress: "",
       applicantState: "",
       ableToWorkInUS: null,
 
@@ -179,8 +201,9 @@ export default {
   },
   components: {
     appCard: Card
-  }
-};
+  },
+  mixins: [validatorMixin]
+}
 </script>
 
 <style>
