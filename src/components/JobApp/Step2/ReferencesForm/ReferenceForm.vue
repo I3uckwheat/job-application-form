@@ -14,6 +14,8 @@
     <v-flex xs12 sm6>
       <v-text-field
         label="Phone Number"
+        mask="phone"
+        prepend-icon="phone"
         v-model="phoneNumber">
       </v-text-field>
     </v-flex>

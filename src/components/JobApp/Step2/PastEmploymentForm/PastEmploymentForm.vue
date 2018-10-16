@@ -25,6 +25,8 @@
           <v-flex xs12 sm4>
             <v-text-field
               label="Phone Number"
+              prepend-icon="phone"
+              mask="phone"
               v-model="jobs[index].phoneNumber">
             </v-text-field>
           </v-flex>
@@ -72,6 +74,7 @@
           <v-flex xs6 sm6>
             <v-text-field
               label="Starting Hourly Pay"
+              prefix="$"
               v-model="jobs[index].startingHourly">
             </v-text-field>
           </v-flex>
@@ -79,6 +82,7 @@
           <v-flex xs6 sm6>
             <v-text-field
               label="Ending Hourly Pay"
+              prefix="$"
               v-model="jobs[index].endingHourly">
             </v-text-field>
           </v-flex>

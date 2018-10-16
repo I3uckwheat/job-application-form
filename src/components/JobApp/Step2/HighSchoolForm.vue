@@ -17,21 +17,21 @@
       </v-flex>
 
       <!-- Row Two -->
-      <v-flex xs12 sm4>
+      <v-flex xs12 sm5>
         <v-text-field
           label="Area of Study">
         </v-text-field>
       </v-flex>
 
-      <v-flex xs12 sm4>
+      <v-flex xs12 sm3>
         <v-text-field
           label="Years Completed">
         </v-text-field>
       </v-flex>
 
-      <v-flex xs12 sm1>
+      <v-flex xs12 sm4>
         <v-text-field
-          label="Diploma Checkbox">
+          label="Diploma">
         </v-text-field>
       </v-flex>
     </v-layout>

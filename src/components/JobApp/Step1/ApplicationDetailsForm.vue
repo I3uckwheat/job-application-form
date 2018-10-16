@@ -24,7 +24,7 @@
 
     <v-flex xs12 sm4>
       <v-text-field
-        label="Desired monies range">
+        label="Desired Salary Range">
       </v-text-field>
     </v-flex>
 
