@@ -83,6 +83,27 @@
 
         </v-layout>
       </v-flex>
+
+      <!-- Row Four -->
+      <v-flex xs12>
+        <h4>Are you able to work in the US?</h4>
+        <v-radio-group
+        v-model="ableToWorkInUS">
+          <v-layout>
+
+            <v-radio
+              label="Yes"
+              value=true>
+            </v-radio>
+
+            <v-radio
+              label="No"
+              value=false>
+            </v-radio>
+
+          </v-layout>
+        </v-radio-group>
+      </v-flex>
     </v-layout>
 
   </app-card>
@@ -95,6 +116,7 @@ export default {
   data() {
     return {
       applicantState: '',
+      ableToWorkInUS: null,
 
 
       states: [
