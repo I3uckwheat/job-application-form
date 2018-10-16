@@ -6,12 +6,18 @@
       <app-date-dialog 
         label="Date of Application" 
         v-model="applicationDate"
+        :rules="existsRule('Date of Application')"
+        validate-on-blur
       ></app-date-dialog>
     </v-flex>
 
     <v-flex xs12 sm4>
       <v-text-field
-        label="Position Applied For">
+        label="Position Applied For"
+        v-model="positionAppliedFor"
+        :rules="existsRule('Position')"
+        validate-on-blur
+        >
       </v-text-field>
     </v-flex>
 
@@ -20,13 +26,19 @@
       <app-date-dialog 
         label="Date Available for Work" 
         v-model="dateAvailable"
+        :rules="existsRule('Date Available')"
+        validate-on-blur
       ></app-date-dialog>
     </v-flex>
 
     <v-flex xs12 sm4>
       <v-text-field
         label="Desired Salary Range"
-        prefix="$">
+        prefix="$"
+        v-model="desiredSalary"
+        validate-on-blur
+        :rules="existsRule('Desired Salary')"
+        >
       </v-text-field>
     </v-flex>
   </v-layout>
@@ -54,18 +66,23 @@
 import Card from "../shared/Card.vue";
 import DateDialog from "../shared/DateDialog.vue";
 
+import validatorMixin from "../../../mixins/validatorMixin";
+
 export default {
   data() {
     return {
       applicationDate: "",
+      positionAppliedFor: "",
       dateAvailable: "",
+      desiredSalary: "",
       avilability: []
     };
   },
   components: {
     appCard: Card,
     appDateDialog: DateDialog
-  }
+  },
+  mixins: [validatorMixin]
 };
 </script>
 
