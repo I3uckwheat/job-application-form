@@ -1,9 +1,9 @@
 <template>
   <v-form ref="form">
-    <high-school-form></high-school-form>
-    <undergrad-school-form></undergrad-school-form>
-    <past-employment-form></past-employment-form>
-    <references-form></references-form>
+    <!-- <high-school-form v-model="highSchool"></high-school-form> -->
+    <!-- <undergrad-school-form v-model="undergrad"></undergrad-school-form> -->
+    <!-- <past-employment-form v-model="pastEmployment"></past-employment-form> -->
+    <references-form v-model="references"></references-form>
   </v-form>
  </template>
 
@@ -14,6 +14,14 @@ import PastEmploymentForm from "./PastEmploymentForm/PastEmploymentForm.vue";
 import ReferencesForm from "./ReferencesForm/ReferencesForm.vue";
 
 export default {
+  data() {
+    return {
+      highSchool: {},
+      undergrad: {},
+      pastEmployment: {},
+      references: {}
+    }
+  },
   components: {
     HighSchoolForm,
     UndergradSchoolForm,
@@ -22,7 +30,6 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     next(this.$refs.form.validate());
-
   }
 };
 </script>
