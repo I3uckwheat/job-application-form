@@ -72,9 +72,6 @@ export default {
   props: {
     value: Object
   },
-  created() {
-    // this.value.availability = [];
-  },
   components: {
     appCard: Card,
     appDateDialog: DateDialog
