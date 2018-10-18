@@ -6,6 +6,7 @@
   persistent
   lazy
   full-width
+  required
   width="290px"
 >
   <v-text-field
@@ -13,6 +14,7 @@
     v-model="date"
     :label="label"
     prepend-icon="event"
+    :rules="rules"
     readonly
   ></v-text-field>
   <v-date-picker v-model="date" scrollable>
@@ -39,7 +41,7 @@ export default {
       this.$emit("input", this.date);
     }
   },
-  props: ["label", "value"]
+  props: ["label", "value", "rules"]
 };
 </script>
 

@@ -6,7 +6,8 @@
       <!-- Row One -->
       <v-flex xs12 sm4>
         <v-text-field
-          v-model="lastName"
+          @blur="updateForm"
+          v-model="value.lastName"
           :rules="existsRule('Last Name')"
           label="Last Name"
           validate-on-blur
@@ -16,7 +17,8 @@
 
       <v-flex xs12 sm4>
         <v-text-field
-          v-model="firstName"
+          @blur="updateForm"
+          v-model="value.firstName"
           label="First Name"
           :rules="existsRule('First Name')"
           validate-on-blur
@@ -26,6 +28,8 @@
 
       <v-flex xs12 sm4>
         <v-text-field
+          @blur="updateForm"
+          v-model="value.middleName"
           label="Middle Name">
         </v-text-field>
       </v-flex>
@@ -33,7 +37,9 @@
       <!-- Row Two -->
       <v-flex xs12 sm4>
         <v-text-field
+          @blur="updateForm"
           label="Address"
+          v-model="value.address"
           :rules="existsRule('Address')"
           validate-on-blur
           >
@@ -42,7 +48,9 @@
 
       <v-flex xs12 sm3>
         <v-text-field
+          @blur="updateForm"
           label="City"
+          v-model="value.city"
           :rules="existsRule('City')"
           validate-on-blur
           >
@@ -51,7 +59,8 @@
 
       <v-flex xs12 sm2>
         <v-autocomplete
-          v-model="applicantState"
+          @blur="updateForm"
+          v-model="value.applicantState"
           :rules="existsRule('State')"
           validate-on-blur
           :items="states"
@@ -67,7 +76,8 @@
 
       <v-flex xs12 sm2>
         <v-text-field
-          v-model="zipCode"
+          @blur="updateForm"
+          v-model="value.zipCode"
           :rules="existsRule('Zip Code')"
           validate-on-blur
           label="Zip Code"
@@ -81,9 +91,10 @@
           
           <v-flex xs12 sm5>
             <v-text-field
+              @blur="updateForm"
               v-model="phoneNumber"
               :rules="phoneNumberRules"
-              validate-on-blur
+              :validate-on-blur="true"
               label="Phone Number"
               prepend-icon="phone"
               mask="phone">
@@ -92,6 +103,8 @@
 
           <v-flex xs12 sm6>
             <v-text-field
+              @blur="updateForm"
+              v-model="value.emailAddress"
               label="Email Address">
             </v-text-field>
           </v-flex>
@@ -103,9 +116,10 @@
       <v-flex xs11>
         <h4>Are you able to work in the US?</h4>
         <v-radio-group
-        v-model="ableToWorkInUS"
-        :rules="existsRule('This')"
-        validate-on-blur
+          @change="updateForm"
+          v-model="value.ableToWorkInUS"
+          :rules="existsRule('This')"
+          validate-on-blur
         >
           <v-layout justify-strt>
             <v-flex xs2>
@@ -135,23 +149,24 @@ import Card from "../shared/Card.vue";
 import validatorMixin from "../../../mixins/validatorMixin";
 
 export default {
+  methods: {
+    updateForm() {
+      this.$emit("input", this.value);
+    }
+  },
+  props: {
+    value: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
-      lastName: "",
-      firstName: "",
-      middleName: "",
-      address: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      phoneNumber: "",
+      phoneNumber: null,
       phoneNumberRules: [
-        v => v.length === 10 || "10 digit phone number is required"
+        ...this.existsRule('Phone Number'),
+        v => !v || v.length === 10 || "10 digit phone number is required"
       ],
-      emailAddress: "",
-      applicantState: "",
-      ableToWorkInUS: null,
-
       states: [
         "Alabama",
         "Alaska",

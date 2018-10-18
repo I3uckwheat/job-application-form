@@ -5,7 +5,7 @@
     <v-flex xs12 sm4>
       <app-date-dialog 
         label="Date of Application" 
-        v-model="applicationDate"
+        v-model="value.applicationDate"
         :rules="existsRule('Date of Application')"
         validate-on-blur
       ></app-date-dialog>
@@ -14,7 +14,7 @@
     <v-flex xs12 sm4>
       <v-text-field
         label="Position Applied For"
-        v-model="positionAppliedFor"
+        v-model="value.positionAppliedFor"
         :rules="existsRule('Position')"
         validate-on-blur
         >
@@ -25,7 +25,7 @@
     <v-flex xs12 sm4>
       <app-date-dialog 
         label="Date Available for Work" 
-        v-model="dateAvailable"
+        v-model="value.dateAvailable"
         :rules="existsRule('Date Available')"
         validate-on-blur
       ></app-date-dialog>
@@ -35,7 +35,7 @@
       <v-text-field
         label="Desired Salary Range"
         prefix="$"
-        v-model="desiredSalary"
+        v-model="value.desiredSalary"
         validate-on-blur
         :rules="existsRule('Desired Salary')"
         >
@@ -46,15 +46,15 @@
   <h4>Are you available to work:</h4>
   <v-layout justify-start>
     <v-flex xs2>
-      <v-checkbox v-model="availability" label="Full-Time" value="full"></v-checkbox>
+      <v-checkbox v-model="value.availability" label="Full-Time" value="full"></v-checkbox>
     </v-flex>
 
     <v-flex xs2>
-      <v-checkbox v-model="availability" label="Part-Time" value="part"></v-checkbox>
+      <v-checkbox v-model="value.availability" label="Part-Time" value="part"></v-checkbox>
     </v-flex>
 
     <v-flex xs2>
-      <v-checkbox v-model="availability" label="Temporary" value="temp"></v-checkbox>
+      <v-checkbox v-model="value.availability" label="Temporary" value="temp"></v-checkbox>
     </v-flex>
   </v-layout>
 
@@ -69,14 +69,11 @@ import DateDialog from "../shared/DateDialog.vue";
 import validatorMixin from "../../../mixins/validatorMixin";
 
 export default {
-  data() {
-    return {
-      applicationDate: "",
-      positionAppliedFor: "",
-      dateAvailable: "",
-      desiredSalary: "",
-      avilability: []
-    };
+  props: {
+    value: Object
+  },
+  created() {
+    // this.value.availability = [];
   },
   components: {
     appCard: Card,

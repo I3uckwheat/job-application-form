@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <v-form ref="form">
     <high-school-form></high-school-form>
     <undergrad-school-form></undergrad-school-form>
     <past-employment-form></past-employment-form>
     <references-form></references-form>
-  </div>
+  </v-form>
  </template>
 
 <script>
@@ -19,6 +19,10 @@ export default {
     UndergradSchoolForm,
     PastEmploymentForm,
     ReferencesForm
+  },
+  beforeRouteLeave(to, from, next) {
+    next(this.$refs.form.validate());
+
   }
 };
 </script>
