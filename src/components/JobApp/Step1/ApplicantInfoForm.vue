@@ -92,7 +92,7 @@
           <v-flex xs12 sm5>
             <v-text-field
               @blur="updateForm"
-              v-model="phoneNumber"
+              v-model="value.phoneNumber"
               :rules="phoneNumberRules"
               :validate-on-blur="true"
               label="Phone Number"
@@ -105,6 +105,7 @@
             <v-text-field
               @blur="updateForm"
               v-model="value.emailAddress"
+              :rules="rules.email"
               label="Email Address">
             </v-text-field>
           </v-flex>
@@ -162,9 +163,8 @@ export default {
   },
   data() {
     return {
-      phoneNumber: null,
       phoneNumberRules: [
-        ...this.existsRule('Phone Number'),
+        ...this.existsRule("Phone Number"),
         v => !v || v.length === 10 || "10 digit phone number is required"
       ],
       states: [
