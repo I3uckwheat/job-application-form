@@ -7,7 +7,7 @@
     <v-flex xs12 sm6>
       <v-text-field
         label="Name"
-        v-model="name">
+        v-model="value.name">
       </v-text-field>
     </v-flex>
 
@@ -16,14 +16,14 @@
         label="Phone Number"
         mask="phone"
         prepend-icon="phone"
-        v-model="phoneNumber">
+        v-model="value.phoneNumber">
       </v-text-field>
     </v-flex>
 
     <v-flex xs12 sm12>
       <v-text-field
         label="Address"
-        v-model="address">
+        v-model="value.address">
       </v-text-field>
     </v-flex>
 
@@ -33,15 +33,12 @@
 
 <script>
 export default {
-  data() {
-    return {
-      name: "",
-      phoneNumber: "",
-      address: ""
-    };
-  },
   props: {
-    index: Number
+    index: Number,
+    value: {
+      type: Object,
+      required: true
+    }
   }
 };
 </script>
