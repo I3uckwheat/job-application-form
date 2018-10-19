@@ -54,10 +54,8 @@ export default {
       required: true
     }
   }
-
-}
+};
 </script>
 
 <style>
-
 </style>

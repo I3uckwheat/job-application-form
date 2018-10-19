@@ -34,7 +34,7 @@ export default {
   methods: {
     addSchool() {
       const tempValue = [...this.value, {}];
-      this.$emit('input', tempValue);
+      this.$emit("input", tempValue);
     }
   },
   components: {
