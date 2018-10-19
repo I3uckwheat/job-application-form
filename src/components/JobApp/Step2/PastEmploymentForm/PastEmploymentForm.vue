@@ -2,102 +2,13 @@
   <app-card>
     <h2 slot="title">Past Employment</h2>
 
-    <template v-for="(job, index) in jobs">
-      <div :key="index" :class="{spaced: index !== jobs.length - 1}" class="layout-wrapper">
-        <h3>Employer {{ index + 1 }}</h3>
-        <v-layout row wrap justify-space-between> 
-
-          <!-- Top row -->
-          <v-flex xs12 sm4>
-            <v-text-field
-              label="Employer"
-              v-model="jobs[index].employer">
-            </v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <v-text-field
-              label="Address"
-              v-model="jobs[index].address">
-            </v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <v-text-field
-              label="Phone Number"
-              prepend-icon="phone"
-              mask="phone"
-              v-model="jobs[index].phoneNumber">
-            </v-text-field>
-          </v-flex>
-
-          <!-- Second Row -->
-          <v-flex xs12 sm4>
-            <v-text-field
-              label="Job Title"
-              v-model="jobs[index].title">
-            </v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <v-text-field
-              label="Supervisor"
-              v-model="jobs[index].supervisor">
-            </v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <v-text-field
-              label="Reason for Leaving"
-              v-model="jobs[index].leaveReason">
-            </v-text-field>
-          </v-flex>
-
-          <!-- Third Row -->
-          <v-flex xs6 sm6>
-            <app-date-dialog
-              label="Start Date"
-              v-model="jobs[index].startDate"
-            >
-            </app-date-dialog>
-          </v-flex>
-
-          <v-flex xs6 sm6>
-            <app-date-dialog
-              label="End Date"
-              v-model="jobs[index].endDate"
-            >
-            </app-date-dialog>
-          </v-flex>
-
-          <!-- Fourth Row -->
-          <v-flex xs6 sm6>
-            <v-text-field
-              label="Starting Hourly Pay"
-              prefix="$"
-              v-model="jobs[index].startingHourly">
-            </v-text-field>
-          </v-flex>
-
-          <v-flex xs6 sm6>
-            <v-text-field
-              label="Ending Hourly Pay"
-              prefix="$"
-              v-model="jobs[index].endingHourly">
-            </v-text-field>
-          </v-flex>
-
-          <!-- Final Row -->
-          <v-flex xs12 sm122>
-            <v-textarea
-              label="Work Peformed"
-              v-model="jobs[index].workPeformed">
-            </v-textarea>
-          </v-flex>
-
-        </v-layout>
-      </div>
-    </template>
+    <past-employment
+      v-for="(job, index) in jobs"
+      :key="index"
+      :employerNumber="index + 1"
+      :class="{spaced: index !== jobs.length - 1}"
+      v-model="jobs[index]"
+    ></past-employment>
 
     <app-add-block-button @click="addJob">Add Another Job</app-add-block-button>
 
@@ -106,8 +17,8 @@
 
 <script>
 import Card from "../../shared/Card.vue";
-import DateDialog from "../../shared/DateDialog.vue";
 import AddBlockButton from "../../shared/AddBlockButton.vue";
+import PastEmployment from "./PastEmployment.vue";
 
 export default {
   data() {
@@ -120,25 +31,13 @@ export default {
   },
   methods: {
     addJob() {
-      this.jobs.push({
-        employer: "",
-        Address: "",
-        phoneNumber: "",
-        title: "",
-        supervisor: "",
-        leaveReason: "",
-        startDate: "",
-        endDate: "",
-        startingHourly: "",
-        endingHourly: "",
-        workPeformed: ""
-      });
+      this.jobs.push({});
     }
   },
   components: {
     appCard: Card,
     appAddBlockButton: AddBlockButton,
-    appDateDialog: DateDialog
+    PastEmployment
   }
 };
 </script>
