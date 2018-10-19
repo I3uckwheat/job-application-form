@@ -112,10 +112,8 @@ export default {
   components: {
     appDateDialog: DateDialog
   }
-
-}
+};
 </script>
 
 <style>
-
 </style>

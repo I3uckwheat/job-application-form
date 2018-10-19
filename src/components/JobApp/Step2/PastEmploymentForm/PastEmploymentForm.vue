@@ -3,11 +3,11 @@
     <h2 slot="title">Past Employment</h2>
 
     <past-employment
-      v-for="(job, index) in jobs"
+      v-for="(job, index) in value"
       :key="index"
       :employerNumber="index + 1"
-      :class="{spaced: index !== jobs.length - 1}"
-      v-model="jobs[index]"
+      :class="{spaced: index !== value.length - 1}"
+      v-model="value[index]"
     ></past-employment>
 
     <app-add-block-button @click="addJob">Add Another Job</app-add-block-button>
@@ -21,17 +21,19 @@ import AddBlockButton from "../../shared/AddBlockButton.vue";
 import PastEmployment from "./PastEmployment.vue";
 
 export default {
-  data() {
-    return {
-      jobs: []
-    };
+  props: {
+    value: {
+      required: true,
+      type: Array
+    }
   },
   created() {
     this.addJob();
   },
   methods: {
     addJob() {
-      this.jobs.push({});
+      const tempValue = [...this.value, {}];
+      this.$emit("input", tempValue);
     }
   },
   components: {
