@@ -197,7 +197,7 @@
                     v-model="model.general.fields.state"
                     label="State"
                     :rules="[rules.required]"
-                    auto
+                    :menu-props="'auto'"
                     :readonly="readOnly"
                     required>
                 </v-autocomplete>

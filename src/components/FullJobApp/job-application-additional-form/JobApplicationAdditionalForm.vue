@@ -105,15 +105,16 @@
             <v-layout row wrap>
               <!-- Column 1: Machinery List -->
               <v-flex xs12>
-                <v-select
+                <v-combobox
                     v-model="model.additional.fields.machineryList"
                     label="Production/Mobile Machinery (list)"
                     hint="Hit the enter key after typing each skill"
                     persistent-hint
                     chips
                     :disabled="readOnly"
-                    tags>
-                </v-select>
+                    multiple
+                  >
+                </v-combobox>
               </v-flex>
             </v-layout>
 
@@ -121,15 +122,16 @@
             <v-layout row wrap>
               <!-- Column 1: Other List -->
               <v-flex xs12>
-                <v-select
+                <v-combobox
                     v-model="model.additional.fields.otherList"
                     label="Other (list)"
                     hint="Hit the enter key after typing each skill"
                     persistent-hint
                     chips
                     :disabled="readOnly"
-                    tags>
-                </v-select>
+                    multiple
+                  >
+                </v-combobox>
               </v-flex>
             </v-layout>
           </v-card-text>
