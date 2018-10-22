@@ -380,15 +380,14 @@
             <v-layout row wrap>
               <!-- Column 1: Training, Skills and Activities -->
               <v-flex xs12>
-                <v-text-field
+                <v-textarea
                     v-model="model.education.fields.training"
                     :label="trainingLabel"
                     :counter="1000"
                     :rules="[rules.max(1000)]"
                     :readonly="readOnly"
-                    multi-line
                     auto-grow>
-                </v-text-field>
+                </v-textarea>
               </v-flex>
             </v-layout>
           </v-card-text>
@@ -405,15 +404,14 @@
             <v-layout row wrap>
               <!-- Column 1: Military Training -->
               <v-flex xs12>
-                <v-text-field
+                <v-textarea
                     v-model="model.education.fields.militaryTraining"
                     label="Describe any job-related training received in the United States military."
                     :counter="1000"
                     :rules="[rules.max(1000)]"
                     :readonly="readOnly"
-                    multi-line
                     auto-grow>
-                </v-text-field>
+                </v-textarea>
               </v-flex>
             </v-layout>
           </v-card-text>

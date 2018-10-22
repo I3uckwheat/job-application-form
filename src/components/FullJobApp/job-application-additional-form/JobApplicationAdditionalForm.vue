@@ -13,7 +13,7 @@
             <v-layout row wrap>
               <!-- Column 1: Other Qualifications -->
               <v-flex xs12>
-                <v-text-field
+                <v-textarea
                     v-model="model.additional.fields.otherQualifications"
                     :label="otherQualificationsLabel"
                     :counter="1000"
@@ -22,7 +22,7 @@
                     multi-line
                     auto-grow
                     :autofocus="!readOnly">
-                </v-text-field>
+                </v-textarea>
               </v-flex>
             </v-layout>
           </v-card-text>
@@ -147,15 +147,14 @@
             <v-layout row wrap>
               <!-- Column 1: Additional Information Textarea -->
               <v-flex xs12>
-                <v-text-field
+                <v-textarea
                     v-model="model.additional.fields.additionalInformation"
                     :label="additionalInformationLabel"
                     :counter="1000"
                     :rules="[rules.max(1000)]"
                     :readonly="readOnly"
-                    multi-line
                     auto-grow>
-                </v-text-field>
+                </v-textarea>
               </v-flex>
             </v-layout>
           </v-card-text>

@@ -205,15 +205,14 @@
               <v-layout row wrap>
                 <!-- Column 1: Past Employment Work Performed -->
                 <v-flex xs12>
-                  <v-text-field
+                  <v-textarea
                       v-model="job.workPerformed"
                       label="Work Performed"
                       :counter="1000"
                       :rules="[rules.max(1000)]"
                       :readonly="readOnly"
-                      multi-line
                       auto-grow>
-                  </v-text-field>
+                  </v-textarea>
                 </v-flex>
               </v-layout>
             </v-card-text>
@@ -246,7 +245,7 @@
             <v-layout row wrap>
               <!-- Column 1: Training, Skills and Activities -->
               <v-flex xs12>
-                <v-text-field
+                <v-textarea
                     v-model="model.employment.fields.activitiesAndOffice"
                     label="List professional, trade, business or civic activities and offices held."
                     :counter="1000"
@@ -254,9 +253,8 @@
                     :hint="activitiesAndOfficeHint"
                     :readonly="readOnly"
                     persistent-hint
-                    multi-line
                     auto-grow>
-                </v-text-field>
+                </v-textarea>
               </v-flex>
             </v-layout>
           </v-card-text>

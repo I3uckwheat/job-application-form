@@ -192,16 +192,15 @@
 
               <!-- Column 3: State -->
               <v-flex xs12 md3>
-                <v-select
+                <v-autocomplete
                     :items="this.$store.state.usStatesAndTerritories"
                     v-model="model.general.fields.state"
                     label="State"
                     :rules="[rules.required]"
-                    autocomplete
                     auto
                     :readonly="readOnly"
                     required>
-                </v-select>
+                </v-autocomplete>
               </v-flex>
 
               <!-- Column 4: Zip Code -->
