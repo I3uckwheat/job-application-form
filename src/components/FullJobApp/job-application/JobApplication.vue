@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import JobApplicationsService from '../../services/JobApplicationsService';
+  import JobApplicationsService from '../../../services/JobApplicationsService';
 
   export default {
     name: 'job-application',

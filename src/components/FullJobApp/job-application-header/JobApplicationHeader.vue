@@ -5,7 +5,7 @@
         <h1>Application<br>For Employment</h1>
       </v-flex>
       <v-flex xs12 sm5 text-xs-center text-sm-right>
-        <img src="../../assets/images/logos/tr-logo-340x167.png">
+        <img src="../../../assets/images/logos/tr-logo-340x167.png">
         <br>
         <v-btn
             color="warning"

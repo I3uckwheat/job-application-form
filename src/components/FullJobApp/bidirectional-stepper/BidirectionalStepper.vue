@@ -202,7 +202,6 @@
 
 <script>
   import Vue from 'vue';
-  import router from '../../router/index';
 
   export default {
     name: 'bidirectional-stepper',
@@ -278,7 +277,7 @@
           element => element.id === this.activeStep,
         )[0];
 
-        router.push({
+        this.$router.push({
           path: activeStepConfig.routeAlias,
           query: this.$route.query,
         });
