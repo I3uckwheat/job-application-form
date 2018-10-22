@@ -13,8 +13,6 @@
       <app-footer></app-footer>
     </template>
 
-
-
   </v-app>
 </template>
 
@@ -26,6 +24,16 @@ import JobNav from "../components/JobApp/JobNav/JobNav.vue";
 import FullJobApp from "../components/FullJobApp/job-application/JobApplication.vue";
 
 export default {
+  beforeCreate() {
+    if (this.$route.query.form === 'advanced') {
+      this.$router.push({
+        path: '/job-application/general',
+        query: {form: 'advanced'}
+      })
+    } else {
+      this.$router.push('/job-application/step1')
+    }
+  },
   components: {
     appHeader: Header,
     appFooter: Footer,
