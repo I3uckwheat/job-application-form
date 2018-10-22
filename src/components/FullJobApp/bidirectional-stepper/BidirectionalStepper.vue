@@ -1,5 +1,6 @@
 <template>
   <v-layout row wrap>
+    <app-advanced-toggle></app-advanced-toggle>
     <v-flex>
       <!-- VERTICAL stepper for tablet/mobile resolutions -->
       <v-stepper
@@ -207,8 +208,13 @@
 <script>
 import Vue from "vue";
 
+import AdvancedToggle from "../../JobApp/shared/AdvancedToggle.vue";
+
 export default {
   name: "bidirectional-stepper",
+  components: {
+    appAdvancedToggle: AdvancedToggle
+  },
 
   /**
    * Props

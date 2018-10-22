@@ -23,8 +23,9 @@ export default {
     ApplicantDetailsForm
   },
   beforeRouteLeave(to, from, next) {
-    console.log(to);
-    console.log(from);
+    if (to.query.form === "advanced") {
+      return next();
+    }
     next(this.$refs.form.validate());
   }
 };

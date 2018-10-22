@@ -1,12 +1,7 @@
 <template>
   <v-stepper class="mx-1" :value="currentStep" alt-labels>
-    
-    <v-switch 
-      :label="'Advanced Form'" 
-      :value="$route.query.form === 'advanced'"
-      @change="switchFormType()"
-      class="mx-3"
-    ></v-switch>
+
+    <app-advanced-toggle></app-advanced-toggle>
 
     <v-stepper-header>
       <v-stepper-step step="1" :complete="isComplete(1)">General Information</v-stepper-step>
@@ -22,11 +17,11 @@
 </template>
 
 <script>
+import AdvancedToggle from "../shared/AdvancedToggle.vue";
+
 export default {
-  data() {
-    return {
-      advancedToggle: false
-    };
+  components: {
+    appAdvancedToggle: AdvancedToggle
   },
   computed: {
     currentStep() {
@@ -36,14 +31,6 @@ export default {
   methods: {
     isComplete(stepNumber) {
       return this.currentStep > stepNumber;
-    },
-    switchFormType() {
-      this.$router.push({
-        path: "",
-        query: {
-          form: "advanced"
-        }
-      });
     }
   }
 };
