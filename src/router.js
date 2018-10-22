@@ -13,9 +13,18 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/job-app",
+      path: "/job-application",
       name: "jobapp",
       component: JobApp,
+      alias: [
+        "/job-application/general",
+        "/job-application/education",
+        "/job-application/employment",
+        "/job-application/additional",
+        "/job-application/statement",
+        "/job-application/review",
+        "/job-application/submitted"
+      ],
       children: [
         {
           path: "step1",
