@@ -11,7 +11,7 @@
     <!-- 1st to nth Block: Prior Employment Experience -->
     <template v-for="(job, index) in model.employment.fields.jobs">
 
-      <v-layout row wrap :key="job">
+      <v-layout row wrap :key="index">
         <v-flex>
           <v-card class="mx-1 my-2 elevation-5">
             <v-toolbar class="grey lighten-3" flat>
