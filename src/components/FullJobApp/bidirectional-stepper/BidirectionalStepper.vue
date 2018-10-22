@@ -1,6 +1,7 @@
 <template>
+<div>
+  <app-advanced-toggle></app-advanced-toggle>
   <v-layout row wrap>
-    <app-advanced-toggle></app-advanced-toggle>
     <v-flex>
       <!-- VERTICAL stepper for tablet/mobile resolutions -->
       <v-stepper
@@ -203,6 +204,7 @@
       </v-card>
     </v-dialog>
   </v-layout>
+  </div>
 </template>
 
 <script>
