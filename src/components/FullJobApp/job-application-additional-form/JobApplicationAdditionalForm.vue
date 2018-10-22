@@ -19,7 +19,6 @@
                     :counter="1000"
                     :rules="[rules.max(1000)]"
                     :readonly="readOnly"
-                    multi-line
                     auto-grow
                     :autofocus="!readOnly">
                 </v-textarea>
