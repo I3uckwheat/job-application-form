@@ -9,19 +9,18 @@
 </template>
 
 <script>
-  export default {
-    name: 'job-application-footer',
-    data() {
-      return {
-      };
-    },
-  };
+export default {
+  name: "job-application-footer",
+  data() {
+    return {};
+  }
+};
 </script>
 
 <style scoped>
-  h6 {
-    margin: 10px;
-    color: white;
-    font-variant: small-caps;
-  }
+h6 {
+  margin: 10px;
+  color: white;
+  font-variant: small-caps;
+}
 </style>

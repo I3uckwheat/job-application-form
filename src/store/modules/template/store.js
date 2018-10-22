@@ -1,12 +1,12 @@
-import { actions, mutations } from './actions-mutations';
-import { state, getters } from './state-getters';
+import { actions, mutations } from "./actions-mutations";
+import { state, getters } from "./state-getters";
 
 const stepperConfig = {
   namespaced: true,
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };
 
 export default stepperConfig;

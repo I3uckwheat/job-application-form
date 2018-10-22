@@ -17,7 +17,7 @@
             <div class="bs-step-label">{{ step.label }}</div>
           </v-stepper-step>
 
-          <v-stepper-content :step="step.id" class="grey lighten-4">
+          <v-stepper-content :step="step.id" class="grey lighten-4" :key="step.id">
 
             <!-- dynamically insert components & preserves their state -->
             <keep-alive>
@@ -92,7 +92,7 @@
                 :editable="furthestStep >= step.id">
               <div class="bs-step-label">{{ step.label }}</div>
             </v-stepper-step>
-            <v-divider v-if="step.id !== config.steps.length"></v-divider>
+            <v-divider v-if="step.id !== config.steps.length" :key="step.id"></v-divider>
           </template>
         </v-stepper-header>
 
@@ -201,307 +201,318 @@
 </template>
 
 <script>
-  import Vue from 'vue';
+import Vue from "vue";
 
-  export default {
-    name: 'bidirectional-stepper',
+export default {
+  name: "bidirectional-stepper",
 
-    /**
-     * Props
-     */
-    props: {
-      config: {
-        type: Object,
-        required: true,
-      },
-
-      model: {
-        type: Object,
-        required: true,
-      },
-
-      service: {
-        type: Object,
-        required: true,
-      },
-
-      nextLabel: {
-        type: String,
-        required: false,
-      },
-
-      previousLabel: {
-        type: String,
-        required: false,
-      },
-
-      submitLabel: {
-        type: String,
-        required: false,
-      },
-
-      cancelLabel: {
-        type: String,
-        required: false,
-      },
+  /**
+   * Props
+   */
+  props: {
+    config: {
+      type: Object,
+      required: true
     },
 
-    /**
-     * Data
-     */
-    data() {
-      return {
-        readOnly: false,
-        activeStep: false,
-        furthestStep: 1,
-        isSubmittingStepper: false,
-        stepsLoadedCounter: 0,
-        errors: [],
-
-        modals: {
-          errorNotice: false,
-          cancelStepper: false,
-        },
-      };
+    model: {
+      type: Object,
+      required: true
     },
 
-    /**
-     * Methods
-     */
-    methods: {
-      onStepChange() {
-        /**
-         * redirect router to the active step's alias
-         */
-        const activeStepConfig = this.config.steps.filter(
-          element => element.id === this.activeStep,
-        )[0];
+    service: {
+      type: Object,
+      required: true
+    },
 
-        this.$router.push({
-          path: activeStepConfig.routeAlias,
-          query: this.$route.query,
-        });
+    nextLabel: {
+      type: String,
+      required: false
+    },
 
-        /**
-         * Scroll the window to the top of the stepper bar
-         *  - regardless of whether it's vertical or horizontal
-         *  - regardless of whether we're in an IFRAME or not
-         *  - only if the page has been scrolled down past the stepper bar
-         */
-        if (window.top.pageYOffset > 150) {
-          const horizontalStepper = document.querySelector('#HorizontalStepper');
-          const verticalStepper = document.querySelector('#VerticalStepper');
-          const isHorizontal = this.isHidden(verticalStepper);
-          let y = this.findTop(isHorizontal ? horizontalStepper : verticalStepper);
+    previousLabel: {
+      type: String,
+      required: false
+    },
 
-          // add extra spacing when inside an IFRAME
-          if (window.top !== window.self) {
-            y += 210;
-          }
+    submitLabel: {
+      type: String,
+      required: false
+    },
 
-          // only scroll up; never down (avoids unwanted jumps)
-          if (window.top.pageYOffset > (y + 150)) {
-            window.top.scrollTo(0, y);
-          }
-        }
-      },
+    cancelLabel: {
+      type: String,
+      required: false
+    }
+  },
 
-      isHidden(element) {
-        const style = window.self.getComputedStyle(element);
-        return (style.display === 'none');
-      },
+  /**
+   * Data
+   */
+  data() {
+    return {
+      readOnly: false,
+      activeStep: false,
+      furthestStep: 1,
+      isSubmittingStepper: false,
+      stepsLoadedCounter: 0,
+      errors: [],
 
-      findTop(element) {
-        const rect = element.getBoundingClientRect();
-        return rect.top + window.self.scrollY;
-      },
+      modals: {
+        errorNotice: false,
+        cancelStepper: false
+      }
+    };
+  },
 
-      getFirstInvalidStep() {
-        const validSteps = [];
+  /**
+   * Methods
+   */
+  methods: {
+    onStepChange() {
+      /**
+       * redirect router to the active step's alias
+       */
+      const activeStepConfig = this.config.steps.filter(
+        element => element.id === this.activeStep
+      )[0];
 
-        this.config.steps.forEach((element) => {
-          if (this.validateStep(element.id)) {
-            validSteps.push(element.id);
-          }
-        });
+      this.$router.push({
+        path: activeStepConfig.routeAlias,
+        query: this.$route.query
+      });
 
-        let i = 1;
+      /**
+       * Scroll the window to the top of the stepper bar
+       *  - regardless of whether it's vertical or horizontal
+       *  - regardless of whether we're in an IFRAME or not
+       *  - only if the page has been scrolled down past the stepper bar
+       */
+      if (window.top.pageYOffset > 150) {
+        const horizontalStepper = document.querySelector("#HorizontalStepper");
+        const verticalStepper = document.querySelector("#VerticalStepper");
+        const isHorizontal = this.isHidden(verticalStepper);
+        let y = this.findTop(
+          isHorizontal ? horizontalStepper : verticalStepper
+        );
 
-        while (validSteps.includes(i)) {
-          i += 1;
-        }
-
-        this.furthestStep = i;
-
-        return i;
-      },
-
-      validateStep(stepId) {
-        try {
-          const horizontalValid = this.$refs[`HorizontalStep${stepId}`][0].$refs.form.validate();
-          this.$refs[`VerticalStep${stepId}`][0].$refs.form.validate();
-
-          return horizontalValid;
-        } catch (e) {
-          this.errors.push(e.message);
-          return false;
-        }
-      },
-
-      nextStep() {
-        if (!this.validateStep(this.activeStep)) {
-          this.modals.errorNotice = true;
-
-          return false;
+        // add extra spacing when inside an IFRAME
+        if (window.top !== window.self) {
+          y += 210;
         }
 
-        this.activeStep = this.activeStep + 1;
+        // only scroll up; never down (avoids unwanted jumps)
+        if (window.top.pageYOffset > y + 150) {
+          window.top.scrollTo(0, y);
+        }
+      }
+    },
 
-        return true;
-      },
+    isHidden(element) {
+      const style = window.self.getComputedStyle(element);
+      return style.display === "none";
+    },
 
-      previousStep() {
-        this.activeStep = this.activeStep - 1;
-        return true;
-      },
+    findTop(element) {
+      const rect = element.getBoundingClientRect();
+      return rect.top + window.self.scrollY;
+    },
 
-      submit() {
-        this.isSubmittingStepper = true;
+    getFirstInvalidStep() {
+      const validSteps = [];
 
-        this.service.create(this.model).then((response) => {
+      this.config.steps.forEach(element => {
+        if (this.validateStep(element.id)) {
+          validSteps.push(element.id);
+        }
+      });
+
+      let i = 1;
+
+      while (validSteps.includes(i)) {
+        i += 1;
+      }
+
+      this.furthestStep = i;
+
+      return i;
+    },
+
+    validateStep(stepId) {
+      try {
+        const horizontalValid = this.$refs[
+          `HorizontalStep${stepId}`
+        ][0].$refs.form.validate();
+        this.$refs[`VerticalStep${stepId}`][0].$refs.form.validate();
+
+        return horizontalValid;
+      } catch (e) {
+        this.errors.push(e.message);
+        return false;
+      }
+    },
+
+    nextStep() {
+      if (!this.validateStep(this.activeStep)) {
+        this.modals.errorNotice = true;
+
+        return false;
+      }
+
+      this.activeStep = this.activeStep + 1;
+
+      return true;
+    },
+
+    previousStep() {
+      this.activeStep = this.activeStep - 1;
+      return true;
+    },
+
+    submit() {
+      this.isSubmittingStepper = true;
+
+      this.service
+        .create(this.model)
+        .then(response => {
           this.isSubmittingStepper = false;
-          this.$emit('stepper-completed', response);
-        }).catch((e) => {
+          this.$emit("stepper-completed", response);
+        })
+        .catch(e => {
           this.isSubmittingStepper = false;
           this.errors.push(e);
         });
-      },
+    },
 
+    /**
+     * sync URL with stepper
+     */
+    syncActiveStepToUrl() {
       /**
-       * sync URL with stepper
+       * Redirect URL to step 1 if it doesn't match a specific step
        */
-      syncActiveStepToUrl() {
-        /**
-         * Redirect URL to step 1 if it doesn't match a specific step
-         */
-        const urlStepMatch = this.config.steps.filter((element) => {
-          const path = window.location.pathname.toLowerCase().replace('/e-comedge', '');
-          return element.routeAlias === path;
-        });
+      const urlStepMatch = this.config.steps.filter(element => {
+        const path = window.location.pathname
+          .toLowerCase()
+          .replace("/e-comedge", "");
+        return element.routeAlias === path;
+      });
 
-        if (urlStepMatch.length === 0) {
-          this.activeStep = 1; // triggers `watch`
-          return true;
-        }
-
-        /**
-         * Make active step match whats in the URL
-         * Don't allow user to go further than the first invalid step
-         */
-        const firstInvalidStep = this.getFirstInvalidStep();
-        const targetStep = this.config.steps.filter((element) => {
-          const path = window.location.pathname.toLowerCase().replace('/e-comedge', '');
-          return element.routeAlias === path;
-        })[0];
-
-        this.activeStep = (firstInvalidStep < targetStep.id) // triggers `watch`
-            ? firstInvalidStep
-            : targetStep.id;
-
+      if (urlStepMatch.length === 0) {
+        this.activeStep = 1; // triggers `watch`
         return true;
-      },
+      }
 
       /**
-       * set defaults for step button labels
+       * Make active step match whats in the URL
+       * Don't allow user to go further than the first invalid step
        */
-      setLabelDefaultOnButtons() {
-        this.nextLabel = this.nextLabel || 'Next';
-        this.previousLabel = this.previousLabel || 'Previous';
-        this.submitLabel = this.submitLabel || 'Submit';
-        this.cancelLabel = this.cancelLabel || 'Cancel';
-      },
+      const firstInvalidStep = this.getFirstInvalidStep();
+      const targetStep = this.config.steps.filter(element => {
+        const path = window.location.pathname
+          .toLowerCase()
+          .replace("/e-comedge", "");
+        return element.routeAlias === path;
+      })[0];
 
-      /**
-       * load-in dynamic step components based on `config` prop
-       */
-      loadStepContentComponents() {
-        this.config.steps.forEach((step) => {
-          const pascalCased = this._.upperFirst(this._.camelCase(step.component));
+      this.activeStep =
+        firstInvalidStep < targetStep.id // triggers `watch`
+          ? firstInvalidStep
+          : targetStep.id;
 
-          Vue.component(
-            pascalCased,
-            () => import(`../${step.component}/${pascalCased}`),
-          );
-        });
-      },
-
-      cancelStepper() {
-        this.$emit('stepper-canceled');
-        this.modals.cancelStepper = false;
-      },
-
-      /**
-       * Make forms read-only if specified in query string
-       */
-      activateReadOnly() {
-        if (this.$route.query.readOnly === 'true') {
-          this.readOnly = true;
-        }
-      },
+      return true;
     },
 
     /**
-     * Computed Properties
+     * set defaults for step button labels
      */
-    computed: {},
-
-    /**
-     * Watched Properties
-     */
-    watch: {
-      activeStep() {
-        this.onStepChange();
-        this.getFirstInvalidStep();
-      },
+    setLabelDefaultOnButtons() {
+      this.nextLabel = this.nextLabel || "Next";
+      this.previousLabel = this.previousLabel || "Previous";
+      this.submitLabel = this.submitLabel || "Submit";
+      this.cancelLabel = this.cancelLabel || "Cancel";
     },
 
     /**
-     * Lifecycle Hooks
+     * load-in dynamic step components based on `config` prop
      */
-    created() {
+    loadStepContentComponents() {
+      this.config.steps.forEach(step => {
+        const pascalCased = this._.upperFirst(this._.camelCase(step.component));
+
+        Vue.component(pascalCased, () =>
+          import(`../${step.component}/${pascalCased}`)
+        );
+      });
+    },
+
+    cancelStepper() {
+      this.$emit("stepper-canceled");
+      this.modals.cancelStepper = false;
+    },
+
+    /**
+     * Make forms read-only if specified in query string
+     */
+    activateReadOnly() {
+      if (this.$route.query.readOnly === "true") {
+        this.readOnly = true;
+      }
+    }
+  },
+
+  /**
+   * Computed Properties
+   */
+  computed: {},
+
+  /**
+   * Watched Properties
+   */
+  watch: {
+    activeStep() {
+      this.onStepChange();
+      this.getFirstInvalidStep();
+    }
+  },
+
+  /**
+   * Lifecycle Hooks
+   */
+  created() {
+    this.syncActiveStepToUrl();
+    this.activateReadOnly();
+    this.setLabelDefaultOnButtons();
+    this.loadStepContentComponents();
+
+    window.onpopstate = () => {
       this.syncActiveStepToUrl();
-      this.activateReadOnly();
-      this.setLabelDefaultOnButtons();
-      this.loadStepContentComponents();
-
-      window.onpopstate = () => {
-        this.syncActiveStepToUrl();
-      };
-    },
-  };
+    };
+  }
+};
 </script>
 
 <style scoped>
-  .bs-vertical-stepper .bs-step-label {
-    font-size: 150%;
-  }
+.bs-vertical-stepper .bs-step-label {
+  font-size: 150%;
+}
 
-  .bs-horizontal-stepper .bs-step-label {
-    text-align: center;
-  }
+.bs-horizontal-stepper .bs-step-label {
+  text-align: center;
+}
 
-  .submit-button {
-    color: white;
-  }
+.submit-button {
+  color: white;
+}
 
-  .cancel-button {
-    font-size: 80%;
-    text-decoration: underline;
-    color: #6D6D6D;
-    cursor: pointer;
-  }
+.cancel-button {
+  font-size: 80%;
+  text-decoration: underline;
+  color: #6d6d6d;
+  cursor: pointer;
+}
 
-  .confirm-cancel {
-    color: white;
-  }
+.confirm-cancel {
+  color: white;
+}
 </style>

@@ -388,61 +388,64 @@
 </template>
 
 <script>
-  export default {
-    name: 'job-application-additional-form',
+export default {
+  name: "job-application-additional-form",
 
-    /**
-     * Props
-     */
-    props: {
-      model: {
-        type: Object,
-        required: true,
-      },
-
-      readOnly: {
-        type: Boolean,
-        required: false,
-      },
+  /**
+   * Props
+   */
+  props: {
+    model: {
+      type: Object,
+      required: true
     },
 
-    /**
-     * Data Properties
-     */
-    data() {
-      return {
-        valid: true,
-        rules: this.$store.state.vuetifyRules,
+    readOnly: {
+      type: Boolean,
+      required: false
+    }
+  },
 
-        otherQualificationsLabel: 'Summarize special job-related skills and qualifications ' +
-          'acquired from employment or other experience.',
-        additionalInformationLabel: 'State any additional information you feel may be helpful ' +
-          'to us in considering your application.',
-        applicantMessage: 'Note to Applicants: Do not answer this question unless you have been ' +
-          'informed about the requirements of the job for which you are applying.',
-        applicantMessageState: true,
-      };
-    },
+  /**
+   * Data Properties
+   */
+  data() {
+    return {
+      valid: true,
+      rules: this.$store.state.vuetifyRules,
 
-    /**
-     * Methods
-     */
-    methods: {
-      hasOfficeSkill(skill) {
-        return this.model.additional.fields.officeSkills.includes(skill);
-      },
-    },
+      otherQualificationsLabel:
+        "Summarize special job-related skills and qualifications " +
+        "acquired from employment or other experience.",
+      additionalInformationLabel:
+        "State any additional information you feel may be helpful " +
+        "to us in considering your application.",
+      applicantMessage:
+        "Note to Applicants: Do not answer this question unless you have been " +
+        "informed about the requirements of the job for which you are applying.",
+      applicantMessageState: true
+    };
+  },
 
-    /**
-     * Lifecycle Hooks
-     */
-    created() {},
-  };
+  /**
+   * Methods
+   */
+  methods: {
+    hasOfficeSkill(skill) {
+      return this.model.additional.fields.officeSkills.includes(skill);
+    }
+  },
+
+  /**
+   * Lifecycle Hooks
+   */
+  created() {}
+};
 </script>
 
 <style scoped>
-  .jaa-applicant-message {
-    font-size: 120%;
-    color: black;
-  }
+.jaa-applicant-message {
+  font-size: 120%;
+  color: black;
+}
 </style>

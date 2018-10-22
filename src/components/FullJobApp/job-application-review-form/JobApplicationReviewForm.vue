@@ -342,84 +342,84 @@
 </template>
 
 <script>
-  export default {
-    name: 'job-application-review-form',
+export default {
+  name: "job-application-review-form",
 
-    /**
-     * Props
-     */
-    props: {
-      model: {
-        type: Object,
-        required: true,
-      },
+  /**
+   * Props
+   */
+  props: {
+    model: {
+      type: Object,
+      required: true
+    }
+  },
+
+  /**
+   * Data Properties
+   */
+  data() {
+    return {
+      valid: true,
+      submitMessageState: true,
+      applicationReviewHtml: ""
+    };
+  },
+
+  /**
+   * Methods
+   */
+  methods: {
+    convertYesNo(value) {
+      if (value === "Y") {
+        return "Yes";
+      } else if (value === "N") {
+        return "No";
+      }
+
+      return "Not Answered";
     },
 
-    /**
-     * Data Properties
-     */
-    data() {
-      return {
-        valid: true,
-        submitMessageState: true,
-        applicationReviewHtml: '',
-      };
-    },
+    itemizeArray(array) {
+      if (array.length < 1) {
+        return "Not Answered";
+      }
 
-    /**
-     * Methods
-     */
-    methods: {
-      convertYesNo(value) {
-        if (value === 'Y') {
-          return 'Yes';
-        } else if (value === 'N') {
-          return 'No';
-        }
+      return array.join(", ");
+    }
+  },
 
-        return 'Not Answered';
-      },
-
-      itemizeArray(array) {
-        if (array.length < 1) {
-          return 'Not Answered';
-        }
-
-        return array.join(', ');
-      },
-    },
-
-    /**
-     * Lifecycle Hooks
-     */
-    created() {},
-  };
+  /**
+   * Lifecycle Hooks
+   */
+  created() {}
+};
 </script>
 
 <style scoped>
-  .jas-instructions-message {
-    font-size: 120%;
-    color: black;
-    margin-bottom: 15px;
-  }
+.jas-instructions-message {
+  font-size: 120%;
+  color: black;
+  margin-bottom: 15px;
+}
 
-  #ReviewHtml label {
-    display: block;
-    font-weight: bold;
-    color: #888888;
-  }
+#ReviewHtml label {
+  display: block;
+  font-weight: bold;
+  color: #888888;
+}
 
-  #ReviewHtml span {
-    display: block;
-    color: #3D3D3D;
-  }
+#ReviewHtml span {
+  display: block;
+  color: #3d3d3d;
+}
 
-  #ReviewHtml > section {
-    margin-top: 15px;
-  }
+#ReviewHtml > section {
+  margin-top: 15px;
+}
 
-  #ReviewHtml > section > div,
-  #ReviewHtml > section > div > div {
-    margin-bottom: 10px;
-  }
+#ReviewHtml > section > div,
+#ReviewHtml > section > div > div {
+  margin-bottom: 10px;
+}
 </style>

@@ -1,6 +1,13 @@
 <template>
   <v-stepper class="mx-1" :value="currentStep" alt-labels>
-    <v-switch :label="'Advanced Form'" v-model="advancedToggle" class="mx-3"></v-switch>
+    
+    <v-switch 
+      :label="'Advanced Form'" 
+      :value="$route.query.form === 'advanced'"
+      @change="switchFormType()"
+      class="mx-3"
+    ></v-switch>
+
     <v-stepper-header>
       <v-stepper-step step="1" :complete="isComplete(1)">General Information</v-stepper-step>
       <v-divider></v-divider>
@@ -29,6 +36,14 @@ export default {
   methods: {
     isComplete(stepNumber) {
       return this.currentStep > stepNumber;
+    },
+    switchFormType() {
+      this.$router.push({
+        path: "",
+        query: {
+          form: "advanced"
+        }
+      });
     }
   }
 };

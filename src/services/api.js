@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default axios.create({
-  baseURL: 'https://api.t-r.com/',
+  baseURL: "https://api.t-r.com/",
   headers: {
     // Authorization: 'Bearer {token}'
-  },
+  }
 });

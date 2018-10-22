@@ -101,48 +101,48 @@
 </template>
 
 <script>
-  export default {
-    name: 'job-application-statement-form',
+export default {
+  name: "job-application-statement-form",
 
-    /**
-     * Props
-     */
-    props: {
-      model: {
-        type: Object,
-        required: true,
-      },
-
-      readOnly: {
-        type: Boolean,
-        required: false,
-      },
+  /**
+   * Props
+   */
+  props: {
+    model: {
+      type: Object,
+      required: true
     },
 
-    /**
-     * Data Properties
-     */
-    data() {
-      return {
-        valid: true,
-        rules: this.$store.state.vuetifyRules,
+    readOnly: {
+      type: Boolean,
+      required: false
+    }
+  },
 
-        modals: {
-          todaysDate: false,
-        },
-      };
-    },
+  /**
+   * Data Properties
+   */
+  data() {
+    return {
+      valid: true,
+      rules: this.$store.state.vuetifyRules,
 
-    /**
-     * Methods
-     */
-    methods: {},
+      modals: {
+        todaysDate: false
+      }
+    };
+  },
 
-    /**
-     * Lifecycle Hooks
-     */
-    created() {},
-  };
+  /**
+   * Methods
+   */
+  methods: {},
+
+  /**
+   * Lifecycle Hooks
+   */
+  created() {}
+};
 </script>
 
 <style scoped>

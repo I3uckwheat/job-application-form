@@ -31,35 +31,36 @@
 </template>
 
 <script>
-  export default {
-    name: 'job-application-header',
-    data() {
-      return {
-        discriminationMessage: 'We consider applicants for all positions without regard to race, color, ' +
-          'religion, creed, gender, national origin, age, disability, marital or veteran status, or any ' +
-          'other legally protected status.',
-        discriminationMessageState: true,
-      };
+export default {
+  name: "job-application-header",
+  data() {
+    return {
+      discriminationMessage:
+        "We consider applicants for all positions without regard to race, color, " +
+        "religion, creed, gender, national origin, age, disability, marital or veteran status, or any " +
+        "other legally protected status.",
+      discriminationMessageState: true
+    };
+  },
+
+  /**
+   * Methods
+   */
+  methods: {
+    printID() {
+      const newWin = window.open("", "Print Application");
+
+      newWin.document.open();
+      newWin.document.write(this.printHtml());
+      newWin.document.close();
+
+      setTimeout(() => {
+        newWin.close();
+      }, 2500);
     },
 
-    /**
-     * Methods
-     */
-    methods: {
-      printID() {
-        const newWin = window.open('', 'Print Application');
-
-        newWin.document.open();
-        newWin.document.write(this.printHtml());
-        newWin.document.close();
-
-        setTimeout(() => {
-          newWin.close();
-        }, 2500);
-      },
-
-      printHtml() {
-        return `
+    printHtml() {
+      return `
           <html>
             <head>
               <style type="text/css">
@@ -102,35 +103,35 @@
             </head>
 
             <body onload="window.print()">
-              ${document.getElementById('ReviewHtml').outerHTML}
+              ${document.getElementById("ReviewHtml").outerHTML}
             </body>
           </html>
         `;
-      },
-    },
-  };
+    }
+  }
+};
 </script>
 
 <style scoped>
-  h1 {
-    margin: 0;
-    font-variant: small-caps;
-    font-size: 425%;
-    font-weight: 500;
-    letter-spacing: 1px;
-    vertical-align: middle;
-    height: 100%;
-  }
+h1 {
+  margin: 0;
+  font-variant: small-caps;
+  font-size: 425%;
+  font-weight: 500;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  height: 100%;
+}
 
-  img {
-    max-width: 100%;
-  }
+img {
+  max-width: 100%;
+}
 
-  .jah-discrimination-message {
-    font-size: 120%;
-  }
+.jah-discrimination-message {
+  font-size: 120%;
+}
 
-  h1 {
-    margin-top: 10px;
-  }
+h1 {
+  margin-top: 10px;
+}
 </style>

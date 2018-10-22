@@ -425,47 +425,48 @@
 </template>
 
 <script>
-  export default {
-    name: 'job-application-education-form',
+export default {
+  name: "job-application-education-form",
 
-    /**
-     * Props
-     */
-    props: {
-      model: {
-        type: Object,
-        required: true,
-      },
-
-      readOnly: {
-        type: Boolean,
-        required: false,
-      },
+  /**
+   * Props
+   */
+  props: {
+    model: {
+      type: Object,
+      required: true
     },
 
-    /**
-     * Data Properties
-     */
-    data() {
-      return {
-        valid: true,
-        rules: this.$store.state.vuetifyRules,
+    readOnly: {
+      type: Boolean,
+      required: false
+    }
+  },
 
-        trainingLabel: 'Describe any specialized training, apprenticeship, skills ' +
-          'and extra-curricular activities.',
-      };
-    },
+  /**
+   * Data Properties
+   */
+  data() {
+    return {
+      valid: true,
+      rules: this.$store.state.vuetifyRules,
 
-    /**
-     * Methods
-     */
-    methods: {},
+      trainingLabel:
+        "Describe any specialized training, apprenticeship, skills " +
+        "and extra-curricular activities."
+    };
+  },
 
-    /**
-     * Lifecycle Hooks
-     */
-    created() {},
-  };
+  /**
+   * Methods
+   */
+  methods: {},
+
+  /**
+   * Lifecycle Hooks
+   */
+  created() {}
+};
 </script>
 
 <style scoped>

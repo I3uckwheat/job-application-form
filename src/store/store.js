@@ -1,9 +1,9 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import jobApplicationStepperConfig from './modules/job-application-stepper-config/store';
-import jobApplicationFormData from './modules/job-application-form-data/store';
-import usStatesAndTerritories from './modules/us-states-and-territories/store';
-import vuetifyRules from './modules/vuetify-rules/store';
+import Vue from "vue";
+import Vuex from "vuex";
+import jobApplicationStepperConfig from "./modules/job-application-stepper-config/store";
+import jobApplicationFormData from "./modules/job-application-form-data/store";
+import usStatesAndTerritories from "./modules/us-states-and-territories/store";
+import vuetifyRules from "./modules/vuetify-rules/store";
 
 Vue.use(Vuex);
 
@@ -14,6 +14,6 @@ export default new Vuex.Store({
     jobApplicationStepperConfig,
     jobApplicationFormData,
     usStatesAndTerritories,
-    vuetifyRules,
-  },
+    vuetifyRules
+  }
 });

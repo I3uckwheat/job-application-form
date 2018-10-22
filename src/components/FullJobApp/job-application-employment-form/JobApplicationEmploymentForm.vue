@@ -268,119 +268,121 @@
 </template>
 
 <script>
-  export default {
-    name: 'job-application-employment-form',
+export default {
+  name: "job-application-employment-form",
 
-    /**
-     * Props
-     */
-    props: {
-      model: {
-        type: Object,
-        required: true,
-      },
-
-      readOnly: {
-        type: Boolean,
-        required: false,
-      },
+  /**
+   * Props
+   */
+  props: {
+    model: {
+      type: Object,
+      required: true
     },
 
-    /**
-     * Data Properties
-     */
-    data() {
-      return {
-        valid: true,
-        rules: this.$store.state.vuetifyRules,
+    readOnly: {
+      type: Boolean,
+      required: false
+    }
+  },
 
-        modals: {
-          datesEmployed: [],
-        },
+  /**
+   * Data Properties
+   */
+  data() {
+    return {
+      valid: true,
+      rules: this.$store.state.vuetifyRules,
 
-        instructionsMessage: 'Start with your present or last job. Include any job-related military ' +
-        'service assignments and volunteer activities. You may exclude organizations which indicate ' +
-        'race, color, religion, gender, national origin, disabilities or other protected status.',
-        instructionsMessageState: true,
-        activitiesAndOfficeHint: 'You may exclude membership which would reveal gender, race, ' +
-        'religion, national origin, age, ancestry, disability or other protected status.',
-      };
-    },
-
-    /**
-     * Methods
-     */
-    methods: {
-      addPastEmployer() {
-        this.model.employment.fields.jobs.push({
-          employer: null,
-          address: null,
-          telephone: null,
-          jobTitle: null,
-          supervisor: null,
-          reasonForLeaving: null,
-          datesEmployedStart: null,
-          datesEmployedEnd: null,
-          hourlyRateStarting: null,
-          hourlyRateFinal: null,
-          workPerformed: null,
-        });
-
-        this.modals.datesEmployed.push({
-          start: false,
-          end: false,
-        });
+      modals: {
+        datesEmployed: []
       },
 
-      removePastEmployer(index) {
-        this.$swal({
-          title: 'Are you sure you want to delete this employer?',
-          text: "You won't be able to revert this.",
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it.',
-        }).then((result) => {
-          if (result.value) {
-            this.model.employment.fields.jobs.splice(index, 1);
-            this.modals.datesEmployed.splice(index, 1);
-          }
-        });
-      },
+      instructionsMessage:
+        "Start with your present or last job. Include any job-related military " +
+        "service assignments and volunteer activities. You may exclude organizations which indicate " +
+        "race, color, religion, gender, national origin, disabilities or other protected status.",
+      instructionsMessageState: true,
+      activitiesAndOfficeHint:
+        "You may exclude membership which would reveal gender, race, " +
+        "religion, national origin, age, ancestry, disability or other protected status."
+    };
+  },
 
-      isBelowMaxJobs() {
-        return this.model.employment.fields.jobs.length < 10;
-      },
-    },
+  /**
+   * Methods
+   */
+  methods: {
+    addPastEmployer() {
+      this.model.employment.fields.jobs.push({
+        employer: null,
+        address: null,
+        telephone: null,
+        jobTitle: null,
+        supervisor: null,
+        reasonForLeaving: null,
+        datesEmployedStart: null,
+        datesEmployedEnd: null,
+        hourlyRateStarting: null,
+        hourlyRateFinal: null,
+        workPerformed: null
+      });
 
-    /**
-     * Lifecycle Hooks
-     */
-    created() {
-      // sync up job modals with # of jobs
-      this.model.employment.fields.jobs.forEach(() => {
-        this.modals.datesEmployed.push({
-          start: false,
-          end: false,
-        });
+      this.modals.datesEmployed.push({
+        start: false,
+        end: false
       });
     },
-  };
+
+    removePastEmployer(index) {
+      this.$swal({
+        title: "Are you sure you want to delete this employer?",
+        text: "You won't be able to revert this.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it."
+      }).then(result => {
+        if (result.value) {
+          this.model.employment.fields.jobs.splice(index, 1);
+          this.modals.datesEmployed.splice(index, 1);
+        }
+      });
+    },
+
+    isBelowMaxJobs() {
+      return this.model.employment.fields.jobs.length < 10;
+    }
+  },
+
+  /**
+   * Lifecycle Hooks
+   */
+  created() {
+    // sync up job modals with # of jobs
+    this.model.employment.fields.jobs.forEach(() => {
+      this.modals.datesEmployed.push({
+        start: false,
+        end: false
+      });
+    });
+  }
+};
 </script>
 
 
 
 <style scoped>
-  .jae-instructions-message {
-    font-size: 120%;
-  }
+.jae-instructions-message {
+  font-size: 120%;
+}
 
-  .add-past-employer {
-    color: white;
-  }
+.add-past-employer {
+  color: white;
+}
 
-  .add-past-employer span {
-    font-variant: small-caps;
-  }
+.add-past-employer span {
+  font-variant: small-caps;
+}
 </style>

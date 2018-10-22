@@ -23,6 +23,8 @@ export default {
     ApplicantDetailsForm
   },
   beforeRouteLeave(to, from, next) {
+    console.log(to);
+    console.log(from);
     next(this.$refs.form.validate());
   }
 };

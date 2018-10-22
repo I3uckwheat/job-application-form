@@ -916,67 +916,68 @@
 </template>
 
 <script>
-  export default {
-    name: 'job-application-general-form',
+export default {
+  name: "job-application-general-form",
 
-    /**
-     * Props
-     */
-    props: {
-      model: {
-        type: Object,
-        required: true,
-      },
-
-      readOnly: {
-        type: Boolean,
-        required: false,
-      },
+  /**
+   * Props
+   */
+  props: {
+    model: {
+      type: Object,
+      required: true
     },
 
-    /**
-     * Data Properties
-     */
-    data() {
-      return {
-        valid: true,
-        rules: this.$store.state.vuetifyRules,
+    readOnly: {
+      type: Boolean,
+      required: false
+    }
+  },
 
-        modals: {
-          contactTime: false,
-          hasFiledBeforeDate: false,
-          wasEmployedBeforeDate: false,
-          dateAvailable: false,
-          temporaryDateStart: false,
-          temporaryDateEnd: false,
-        },
-      };
-    },
+  /**
+   * Data Properties
+   */
+  data() {
+    return {
+      valid: true,
+      rules: this.$store.state.vuetifyRules,
 
-    /**
-     * Methods
-     */
-    methods: {
-      isAvailableForShift(type) {
-        return this.model.general.fields.availabilityType.includes(type);
-      },
-    },
+      modals: {
+        contactTime: false,
+        hasFiledBeforeDate: false,
+        wasEmployedBeforeDate: false,
+        dateAvailable: false,
+        temporaryDateStart: false,
+        temporaryDateEnd: false
+      }
+    };
+  },
 
-    /**
-     * Lifecycle Hooks
-     */
-    created() {
-      // don't make user fill in today's date
-      this.model.general.fields.applicationDate = this.$moment().format('YYYY-MM-DD');
-    },
-  };
+  /**
+   * Methods
+   */
+  methods: {
+    isAvailableForShift(type) {
+      return this.model.general.fields.availabilityType.includes(type);
+    }
+  },
+
+  /**
+   * Lifecycle Hooks
+   */
+  created() {
+    // don't make user fill in today's date
+    this.model.general.fields.applicationDate = this.$moment().format(
+      "YYYY-MM-DD"
+    );
+  }
+};
 </script>
 
 <style scoped>
-  span {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-  }
+span {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
 </style>
-                         
