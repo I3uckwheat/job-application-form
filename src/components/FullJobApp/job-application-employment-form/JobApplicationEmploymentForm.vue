@@ -11,7 +11,7 @@
     <!-- 1st to nth Block: Prior Employment Experience -->
     <template v-for="(job, index) in model.employment.fields.jobs">
 
-      <v-layout row wrap>
+      <v-layout row wrap :key="job">
         <v-flex>
           <v-card class="mx-1 my-2 elevation-5">
             <v-toolbar class="grey lighten-3" flat>
@@ -32,7 +32,7 @@
               <v-layout row wrap>
                 <!-- Column 1: Past Employment Name -->
                 <v-flex xs12 md4>
-                  <v-text-field
+                  <v-textarea
                       v-model="job.employer"
                       label="Employer"
                       :rules="[rules.required, rules.max(60)]"
@@ -40,7 +40,7 @@
                       :readonly="readOnly"
                       :clearable="!readOnly"
                       required>
-                  </v-text-field>
+                  </v-textarea>
                 </v-flex>
 
                 <!-- Column 2: Past Employment Address -->

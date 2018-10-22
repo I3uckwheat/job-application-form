@@ -9,69 +9,71 @@
           class="bs-stepper bs-vertical-stepper hidden-md-and-up grey lighten-3">
 
         <template v-for="step in this.config.steps">
-          <!-- Step Header Bar -->
-          <v-stepper-step
-              editable
-              :step="step.id"
-              :key="step.id">
-            <div class="bs-step-label">{{ step.label }}</div>
-          </v-stepper-step>
+          <div :key="step.id">
+            <!-- Step Header Bar -->
+            <v-stepper-step
+                editable
+                :step="step.id"
+            >
+              <div class="bs-step-label">{{ step.label }}</div>
+            </v-stepper-step>
 
-          <v-stepper-content :step="step.id" class="grey lighten-4" :key="step.id">
+            <v-stepper-content :step="step.id" class="grey lighten-4">
 
-            <!-- dynamically insert components & preserves their state -->
-            <keep-alive>
-              <component
-                  :is="step.component"
-                  :ref="'VerticalStep' + step.id"
-                  :model="model"
-                  :read-only="readOnly">
-              </component>
-            </keep-alive>
+              <!-- dynamically insert components & preserves their state -->
+              <keep-alive>
+                <component
+                    :is="step.component"
+                    :ref="'VerticalStep' + step.id"
+                    :model="model"
+                    :read-only="readOnly">
+                </component>
+              </keep-alive>
 
-            <!-- Step Navigation Buttons -->
-            <v-layout row wrap>
-              <v-flex xs12 text-xs-right class="ma-3">
-                <v-btn
-                    v-if="step.id !== 1"
-                    large
-                    color="secondary"
-                    @click="previousStep"
-                    class="mx-2 px-3">
-                  {{ previousLabel }}
-                </v-btn>
+              <!-- Step Navigation Buttons -->
+              <v-layout row wrap>
+                <v-flex xs12 text-xs-right class="ma-3">
+                  <v-btn
+                      v-if="step.id !== 1"
+                      large
+                      color="secondary"
+                      @click="previousStep"
+                      class="mx-2 px-3">
+                    {{ previousLabel }}
+                  </v-btn>
 
-                <v-btn
-                    v-if="step.id !== config.steps.length"
-                    large
-                    color="primary"
-                    @click="nextStep"
-                    class="mx-2 px-3">
-                  {{ nextLabel }}
-                </v-btn>
+                  <v-btn
+                      v-if="step.id !== config.steps.length"
+                      large
+                      color="primary"
+                      @click="nextStep"
+                      class="mx-2 px-3">
+                    {{ nextLabel }}
+                  </v-btn>
 
-                <v-btn
-                    v-if="step.id === config.steps.length"
-                    :loading="isSubmittingStepper"
-                    :disabled="isSubmittingStepper || readOnly"
-                    large
-                    @click="submit"
-                    class="teal lighten-1 mx-2 px-3">
-                  {{ submitLabel }}
-                </v-btn>
-              </v-flex>
-            </v-layout>
+                  <v-btn
+                      v-if="step.id === config.steps.length"
+                      :loading="isSubmittingStepper"
+                      :disabled="isSubmittingStepper || readOnly"
+                      large
+                      @click="submit"
+                      class="teal lighten-1 mx-2 px-3">
+                    {{ submitLabel }}
+                  </v-btn>
+                </v-flex>
+              </v-layout>
 
-            <!-- Cancel Stepper -->
-            <v-layout row wrap v-if="!readOnly">
-              <v-flex xs12 text-xs-left class="pa-3">
-                <div class="cancel-button" @click="modals.cancelStepper = true">
-                  {{ cancelLabel }}
-                </div>
-              </v-flex>
-            </v-layout>
+              <!-- Cancel Stepper -->
+              <v-layout row wrap v-if="!readOnly">
+                <v-flex xs12 text-xs-left class="pa-3">
+                  <div class="cancel-button" @click="modals.cancelStepper = true">
+                    {{ cancelLabel }}
+                  </div>
+                </v-flex>
+              </v-layout>
 
-          </v-stepper-content>
+            </v-stepper-content>
+          </div>
         </template>
 
       </v-stepper>
@@ -86,14 +88,16 @@
         <!-- Step Navigation Bar -->
         <v-stepper-header>
           <template v-for="step in config.steps">
-            <v-stepper-step
-                :step="step.id"
-                :key="step.id"
-                :editable="furthestStep >= step.id">
-              <div class="bs-step-label">{{ step.label }}</div>
-            </v-stepper-step>
-            <v-divider v-if="step.id !== config.steps.length" :key="step.id"></v-divider>
+            <div :key="step.id">
+              <v-stepper-step
+                  :step="step.id"
+                  :editable="furthestStep >= step.id">
+                <div class="bs-step-label">{{ step.label }}</div>
+              </v-stepper-step>
+              <v-divider v-if="step.id !== config.steps.length"></v-divider>
+            </div>
           </template>
+
         </v-stepper-header>
 
         <v-stepper-items v-for="step in config.steps" :key="step.id">
