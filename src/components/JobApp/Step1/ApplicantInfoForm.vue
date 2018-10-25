@@ -60,7 +60,7 @@
       <v-flex xs12 sm2>
         <v-autocomplete
           @blur="updateForm"
-          v-model="value.applicantState"
+          v-model="value.state"
           :rules="existsRule('State')"
           validate-on-blur
           :items="states"
@@ -92,7 +92,7 @@
           <v-flex xs12 sm5>
             <v-text-field
               @blur="updateForm"
-              v-model="value.phoneNumber"
+              v-model="value.primaryPhone"
               :rules="phoneNumberRules"
               :validate-on-blur="true"
               label="Phone Number"
@@ -115,7 +115,8 @@
 
       <!-- Row Four -->
       <v-flex xs11>
-        <h4>Are you able to work in the US?</h4>
+        <h4>Eligibility</h4>
+        <p>Are you prevented from lawfully becoming employed in this country because of Visa or Immigration Status? <span class='slant'>Proof of citizenship or immigration status will be required upon employment</span></p>
         <v-radio-group
           @change="updateForm"
           v-model="value.ableToWorkInUS"
@@ -237,5 +238,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.slant {
+  font-style: italic;
+}
 </style>

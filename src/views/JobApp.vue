@@ -23,15 +23,29 @@ import JobNav from "../components/JobApp/JobNav/JobNav.vue";
 
 import FullJobApp from "../components/FullJobApp/job-application/JobApplication.vue";
 
+// Workaround for getting needed data. this is wrong, don't do this
+import { state } from "../store/modules/job-application-form-data/state-getters";
+
 export default {
-  beforeCreate() {
-    if (this.$route.query.form === 'advanced') {
+  created() {
+    // this.setupLocalStorage();
+
+    if (this.$route.query.form === "advanced") {
       this.$router.push({
-        path: '/job-application/general',
-        query: {form: 'advanced'}
-      })
+        path: "/job-application/general",
+        query: { form: "advanced" }
+      });
     } else {
-      this.$router.push('/job-application/step1')
+      this.$router.push("/job-application/step1");
+    }
+  },
+  methods: {
+    setupLocalStorage() {
+      localStorage.clear();
+      // continue workaround
+      if (!localStorage.getItem("trJobApplication")) {
+        localStorage.setItem("trJobApplication", JSON.stringify(state));
+      }
     }
   },
   components: {

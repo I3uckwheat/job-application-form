@@ -80,17 +80,13 @@ export default {
    */
   computed: {
     // sync form data store state with localStorage
-  },
-
-  /**
-   * Methods
-   */
-  methods: {
     setStoreInLocalStorage() {
       // don't overwrite local storage until the attempt to load it in has finished
       if (this.attemptedLocalStorageLoad) {
-        localStorage.trJobApplication = JSON.stringify(
-          this.$store.state.jobApplicationFormData
+        console.log("set in store");
+        localStorage.setItem(
+          "trJobApplication",
+          JSON.stringify(this.$store.state.jobApplicationFormData)
         );
 
         if (!this.firstValidationCheck) {
@@ -100,7 +96,13 @@ export default {
           this.firstValidationCheck = true;
         }
       }
-    },
+    }
+  },
+
+  /**
+   * Methods
+   */
+  methods: {
     onApplicationSuccess() {
       this.applicationCompleted = true;
       // send notification to staff indicating an application is awaiting review
@@ -165,70 +167,59 @@ export default {
 
     // restore form data state from localStorage
     getStoreFromLocalStorage() {
-      try {
-        /**
-         * Check data expiration timestamp
-         *   - delete if expired
-         *   - set expiration timestamp if it doesn't exist
-         */
-        if (typeof localStorage.trJobApplicationTimestamp !== "undefined") {
-          const currentTimestamp = Math.floor(Date.now() / 1000);
-          const expirationTimestamp = parseInt(
-            localStorage.trJobApplicationTimestamp,
-            10
-          );
+      /**
+       * Check data expiration timestamp
+       *   - delete if expired
+       *   - set expiration timestamp if it doesn't exist
+       */
 
-          // data expired: only keep data for 3 days
-          if (currentTimestamp > expirationTimestamp + 259200) {
-            delete localStorage.trJobApplication;
-            delete localStorage.trJobApplicationTimestamp;
+      if (localStorage.getItem("trJobApplicationTimestamp")) {
+        const currentTimestamp = Math.floor(Date.now() / 1000);
+        const expirationTimestamp = Number(
+          localStorage.getItem("trJobApplicationTimestamp")
+        );
 
-            //  create fresh timestamp since old was expired
-            localStorage.trJobApplicationTimestamp = Math.floor(
-              Date.now() / 1000
-            );
-          }
-        } else {
-          // set expiration timestamp if it doesn't exist
-          localStorage.trJobApplicationTimestamp = Math.floor(
-            Date.now() / 1000
+        // data expired, keep only for 3 days
+        if (currentTimestamp > expirationTimestamp + 259200) {
+          localStorage.removeItem("trJobAppliation");
+
+          // create a fresh one
+          localStorage.setItem(
+            "trJobApplicationTimestamp",
+            Math.floor(Date.now() / 1000)
           );
         }
+      } else {
+        // set the timestamp
+        localStorage.setItem(
+          "trJobApplicationTimestamp",
+          Math.floor(Date.now() / 1000)
+        );
+      }
 
-        /**
-         * Recover form data from localStorage if:
-         *   - not expired
-         *   - it exists
-         *   - it's a valid object
-         */
-        if (typeof localStorage.trJobApplication !== "undefined") {
-          const jobApplicationFormData = JSON.parse(
-            localStorage.trJobApplication
-          );
+      // get the existing jobApp
+      const jobAppData = JSON.parse(localStorage.getItem("trJobApplication"));
 
-          if (typeof jobApplicationFormData.general !== "undefined") {
-            this.$store.state.jobApplicationFormData = jobApplicationFormData;
-          }
-        }
-      } catch (e) {
-        // clean up expired or corrupted data
-        delete localStorage.trJobApplication;
-        delete localStorage.trJobApplicationTimestamp;
+      // only place in store if it's not equal to the vuex state, to prevent overwriting
+      if (
+        jobAppData &&
+        jobAppData.general !== undefined &&
+        !_.isEqual(jobAppData, this.$store.state.jobApplicationFormData)
+      ) {
+        this.$store.state.jobApplicationFormData = jobAppData;
       }
 
       this.attemptedLocalStorageLoad = true;
     }
   },
-
-  /**
-   * Lifecycle Hooks
-   */
   created() {
     /**
      * load-in existing application
      *  - database: bring up a submitted application for viewing
      *  - localStorage: resume a partially completed application
      */
+
+    // if client is trying to view a finished job app
     if (typeof this.$route.query.id !== "undefined") {
       this.getStoreFromDatabase();
     } else {
