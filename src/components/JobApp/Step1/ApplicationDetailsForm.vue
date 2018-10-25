@@ -5,6 +5,7 @@
     <v-flex xs12 sm4>
       <app-date-dialog 
         label="Date of Application" 
+        @blur="updateForm"
         v-model="value.applicationDate"
         :rules="existsRule('Date of Application')"
         validate-on-blur
@@ -14,6 +15,7 @@
     <v-flex xs12 sm4>
       <v-text-field
         label="Position Applied For"
+        @blur="updateForm"
         v-model="value.positionAppliedFor"
         :rules="existsRule('Position')"
         validate-on-blur
@@ -25,6 +27,7 @@
     <v-flex xs12 sm4>
       <app-date-dialog 
         label="Date Available for Work" 
+        @blur="updateForm"
         v-model="value.dateAvailable"
         :rules="existsRule('Date Available')"
         validate-on-blur
@@ -34,6 +37,7 @@
     <v-flex xs12 sm4>
       <v-text-field
         label="Desired Salary Range"
+        @blur="updateForm"
         prefix="$"
         v-model="value.desiredSalary"
         validate-on-blur
@@ -46,15 +50,15 @@
   <h4>Are you available to work:</h4>
   <v-layout justify-start>
     <v-flex xs2>
-      <v-checkbox v-model="value.availability" label="Full-Time" value="full"></v-checkbox>
+      <v-checkbox v-model="value.availabilityType" @blur="updateForm" label="Full-Time" value="full-time"></v-checkbox>
     </v-flex>
 
     <v-flex xs2>
-      <v-checkbox v-model="value.availability" label="Part-Time" value="part"></v-checkbox>
+      <v-checkbox v-model="value.availabilityType" @blur="updateForm" label="Part-Time" value="part-time"></v-checkbox>
     </v-flex>
 
     <v-flex xs2>
-      <v-checkbox v-model="value.availability" label="Temporary" value="temp"></v-checkbox>
+      <v-checkbox v-model="value.availabilityType" @blur="updateForm" label="Temporary" value="temp"></v-checkbox>
     </v-flex>
   </v-layout>
 
@@ -71,6 +75,11 @@ import validatorMixin from "../../../mixins/validatorMixin";
 export default {
   props: {
     value: Object
+  },
+  methods: {
+    updateForm() {
+      this.$emit('input', this.value);
+    }
   },
   components: {
     appCard: Card,

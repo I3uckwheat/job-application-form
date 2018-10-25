@@ -28,7 +28,7 @@ import { state } from "../store/modules/job-application-form-data/state-getters"
 
 export default {
   created() {
-    // this.setupLocalStorage();
+    this.setupLocalStorage();
 
     if (this.$route.query.form === "advanced") {
       this.$router.push({
@@ -41,11 +41,30 @@ export default {
   },
   methods: {
     setupLocalStorage() {
-      localStorage.clear();
-      // continue workaround
-      if (!localStorage.getItem("trJobApplication")) {
-        localStorage.setItem("trJobApplication", JSON.stringify(state));
+      const timeStamp = localStorage.getItem("trJobApplicationTimestamp");
+      const jobApp = JSON.parse(localStorage.getItem("trJobApplication"));
+
+      // If timestamp is expired
+      if (this.jobAppIsExpired(timeStamp)) {
+        // delete job-app localStorage
+        localStorage.clear();
+
+        // set a new timestamp
+        localStorage.setItem(
+          "trJobApplicationTimestamp",
+          Math.floor(Date.now() / 1000)
+        );
       }
+      
+      if (!jobApp) {
+        localStorage.setItem('trJobApplication', JSON.stringify(state));
+      }
+    },
+    jobAppIsExpired(timeStamp) {
+      // See FullJobApp/job-application/JobApplication.vue
+      const now = Date.now() / 100;
+      const expiring = timeStamp + 259200;
+      return now > expiring;
     }
   },
   components: {

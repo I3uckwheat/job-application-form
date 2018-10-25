@@ -127,14 +127,14 @@
             <v-flex xs2>
               <v-radio
                 label="Yes"
-                value=true>
+                value="Y">
               </v-radio>
             </v-flex>
 
             <v-flex>
               <v-radio
                 label="No"
-                value=false>
+                value="N">
               </v-radio>
             </v-flex>
 
