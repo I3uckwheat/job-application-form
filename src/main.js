@@ -4,6 +4,7 @@ import Vue from "vue";
 import "./plugins/vuetify";
 import "./plugins/vueLodash";
 import "./plugins/moment";
+import "./plugins/sweetAlert2";
 
 import App from "./App.vue";
 import router from "./router";
