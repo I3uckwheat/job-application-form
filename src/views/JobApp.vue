@@ -55,9 +55,9 @@ export default {
           Math.floor(Date.now() / 1000)
         );
       }
-      
+
       if (!jobApp) {
-        localStorage.setItem('trJobApplication', JSON.stringify(state));
+        localStorage.setItem("trJobApplication", JSON.stringify(state));
       }
     },
     jobAppIsExpired(timeStamp) {

@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     updateForm() {
-      this.$emit('input', this.value);
+      this.$emit("input", this.value);
     }
   },
   components: {

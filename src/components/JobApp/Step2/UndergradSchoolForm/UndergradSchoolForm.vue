@@ -2,16 +2,24 @@
   <app-card>
     <h2 slot="title">Undergraduate College</h2>
 
+    <template v-if="value.length > 1">
+      <undergrad-school
+        v-for="(school, index) in value"
+        :key="index"
+        :schoolNumber="index + 1"
+        :class="{spaced: index !== value.length - 1}"
+        v-model="value[index]"
+      ></undergrad-school>
 
-    <undergrad-school
-      v-for="(school, index) in value"
-      :key="index"
-      :schoolNumber="index + 1"
-      :class="{spaced: index !== value.length - 1}"
-      v-model="value[index]"
-    ></undergrad-school>
+      <app-add-block-button @click="addSchool">Add Another School</app-add-block-button>
+    </template>
 
-    <app-add-block-button @click="addSchool">Add Another School</app-add-block-button>
+    <template v-else>
+      <undergrad-school
+        @input="updateForm"
+        v-model="value"
+      ></undergrad-school>
+    </template>
 
   </app-card>
 </template>
@@ -25,16 +33,23 @@ export default {
   props: {
     value: {
       required: true,
-      type: Array
+      type: [Array, Object]
     }
   },
   created() {
-    this.addSchool();
+    if (this.value.length > 1) {
+      this.addSchool();
+    }
   },
   methods: {
     addSchool() {
-      const tempValue = [...this.value, {}];
-      this.$emit("input", tempValue);
+      if (this.value.length > 1) {
+        const tempValue = [...this.value, {}];
+        this.$emit("input", tempValue);
+      }
+    },
+    updateForm() {
+      this.$emit("input", this.value);
     }
   },
   components: {
