@@ -118,10 +118,10 @@
         <h4>Eligibility</h4>
         <p>Are you prevented from lawfully becoming employed in this country because of Visa or Immigration Status? <span class='slant'>Proof of citizenship or immigration status will be required upon employment</span></p>
         <v-radio-group
-          @change="updateForm"
-          v-model="value.ableToWorkInUS"
+          v-model="value.isEmploymentPrevented"
           :rules="existsRule('This')"
           validate-on-blur
+          @change="updateForm"
         >
           <v-layout justify-strt>
             <v-flex xs2>

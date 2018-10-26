@@ -44,13 +44,13 @@ export default {
         zipCode: formData.general.fields.zipCode,
         primaryPhone: formData.general.fields.primaryPhone,
         emailAddress: formData.general.fields.emailAddress,
-        ableToWorkInUS: formData.general.fields.isEmploymentPrevented
+        isEmploymentPrevented: formData.general.fields.isEmploymentPrevented
       };
     },
     applyToApplicantDetails(formData) {
       this.applicantDetails = {
         applicationDate: formData.general.fields.applicationDate,
-        positionAppliedFor: formData.general.fields.positions,
+        positions: formData.general.fields.positions,
         dateAvailable: formData.general.fields.dateAvailable,
         desiredSalary: formData.general.fields.desiredSalary,
         availabilityType: formData.general.fields.availabilityType

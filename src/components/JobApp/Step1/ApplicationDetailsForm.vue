@@ -16,7 +16,7 @@
       <v-text-field
         label="Position Applied For"
         @blur="updateForm"
-        v-model="value.positionAppliedFor"
+        v-model="value.positions"
         :rules="existsRule('Position')"
         validate-on-blur
         >
@@ -27,7 +27,7 @@
     <v-flex xs12 sm4>
       <app-date-dialog 
         label="Date Available for Work" 
-        @blur="updateForm"
+        @input="updateForm"
         v-model="value.dateAvailable"
         :rules="existsRule('Date Available')"
         validate-on-blur
@@ -50,15 +50,15 @@
   <h4>Are you available to work:</h4>
   <v-layout justify-start>
     <v-flex xs2>
-      <v-checkbox v-model="value.availabilityType" @blur="updateForm" label="Full-Time" value="full-time"></v-checkbox>
+      <v-checkbox v-model="value.availabilityType" @change="updateForm" label="Full-Time" value="full-time"></v-checkbox>
     </v-flex>
 
     <v-flex xs2>
-      <v-checkbox v-model="value.availabilityType" @blur="updateForm" label="Part-Time" value="part-time"></v-checkbox>
+      <v-checkbox v-model="value.availabilityType" @change="updateForm" label="Part-Time" value="part-time"></v-checkbox>
     </v-flex>
 
     <v-flex xs2>
-      <v-checkbox v-model="value.availabilityType" @blur="updateForm" label="Temporary" value="temp"></v-checkbox>
+      <v-checkbox v-model="value.availabilityType" @change="updateForm" label="Temporary" value="temp"></v-checkbox>
     </v-flex>
   </v-layout>
 

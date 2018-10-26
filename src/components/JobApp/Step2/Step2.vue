@@ -14,6 +14,15 @@ import PastEmploymentForm from "./PastEmploymentForm/PastEmploymentForm.vue";
 import ReferencesForm from "./ReferencesForm/ReferencesForm.vue";
 
 export default {
+  created() {
+    // apply localStorage to data
+    const formData = JSON.parse(localStorage.getItem('trJobApplication'));
+
+    this.applyToHighschoolForm(formData);
+    this.applyToUndergradForm(formData);
+    this.applyToPastEmploymentForm(formData);
+    this.applyToReferencesForm(formData);
+  },
   data() {
     return {
       highSchool: {},
@@ -21,6 +30,20 @@ export default {
       pastEmployment: [],
       references: []
     };
+  },
+  methods: {
+    applyToHighschoolForm() {
+      
+    },
+    applyToUndergradForm() {
+      
+    },
+    applyToPastEmploymentForm() {
+
+    },
+    applyToReferencesForm() {
+
+    }
   },
   components: {
     HighSchoolForm,
