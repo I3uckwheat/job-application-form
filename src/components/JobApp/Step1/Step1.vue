@@ -20,6 +20,8 @@ export default {
   },
   methods: {
     updateInfo() {
+      // hacky to pervious bad decisions
+      // avoiding local storage because of fullJobApp
       const formData = {...this.applicantDetails, ...this.applicantInfo };
       const currentData = JSON.parse(localStorage.getItem("trJobApplication"));
 
