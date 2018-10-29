@@ -83,7 +83,6 @@ export default {
     setStoreInLocalStorage() {
       // don't overwrite local storage until the attempt to load it in has finished
       if (this.attemptedLocalStorageLoad) {
-        console.log("set in store");
         localStorage.setItem(
           "trJobApplication",
           JSON.stringify(this.$store.state.jobApplicationFormData)

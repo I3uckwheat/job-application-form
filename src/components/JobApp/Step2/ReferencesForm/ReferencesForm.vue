@@ -25,7 +25,6 @@ export default {
 
   // TODO - make mixin
   created() {
-    console.log(this.value);
     // Turn into a Number if not
     this.renderAmount = Number(this.amount);
 
