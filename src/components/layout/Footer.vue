@@ -3,7 +3,7 @@
     <div class="buttons">
       <back-button v-if="$route.name !== 'step1'"></back-button>
       <continue-button v-if="$route.name !== 'step3'"></continue-button>
-      <finish-button v-else></finish-button>
+      <finish-button v-else @click="clicked"></finish-button>
     </div>
     <v-footer color="primary">
       <v-flex text-xs-center>
@@ -19,6 +19,11 @@ import BackButton from "./BackButton.vue";
 import FinishButton from "./FinishButton.vue";
 
 export default {
+  methods: {
+    clicked() {
+      this.$emit('submit-job-app');
+    }
+  },
   components: {
     ContinueButton,
     BackButton,

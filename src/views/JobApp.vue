@@ -10,7 +10,7 @@
       <app-job-nav class="mx-3 my-2">
         <router-view></router-view>
       </app-job-nav>  
-      <app-footer></app-footer>
+      <app-footer @submit-job-app="submit"></app-footer>
     </template>
 
   </v-app>
@@ -26,6 +26,8 @@ import FullJobApp from "../components/FullJobApp/job-application/JobApplication.
 // Workaround for getting needed data. this is wrong, don't do this
 import { state } from "../store/modules/job-application-form-data/state-getters";
 
+import jobAppService from "../services/JobApplicationsService.js"
+
 export default {
   created() {
     this.setupLocalStorage();
@@ -40,6 +42,16 @@ export default {
     }
   },
   methods: {
+    submit() {
+      jobAppService
+        .create(JSON.parse(localStorage.getItem('trJobApplication')))
+        .then(response => {
+          jobAppService.createNotification();
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    },
     setupLocalStorage() {
       const timeStamp = localStorage.getItem("trJobApplicationTimestamp");
       const jobApp = JSON.parse(localStorage.getItem("trJobApplication"));

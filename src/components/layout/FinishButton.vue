@@ -1,5 +1,5 @@
 <template>
-  <v-btn color="pink" dark>Finish</v-btn> 
+  <v-btn color="pink" dark @click="$emit('click')">Finish</v-btn> 
 </template>
 
 <script>
