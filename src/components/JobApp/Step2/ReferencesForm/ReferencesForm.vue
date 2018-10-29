@@ -1,7 +1,7 @@
 <template>
   <app-card>
     <h2 slot="title">References</h2>
-    <reference-form v-for="n in renderAmount" :key="n" :index="n" v-model="value[n - 1]"></reference-form>
+    <reference-form v-for="n in renderAmount" :key="n" :index="n" v-model="value[n - 1]" @input="updateForm"></reference-form>
   </app-card>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   },
   props: {
     value: {
-      type: Array,
+      type: [Array, Object],
       required: true
     },
     amount: [Number, String]
@@ -25,12 +25,18 @@ export default {
 
   // TODO - make mixin
   created() {
+    console.log(this.value);
     // Turn into a Number if not
     this.renderAmount = Number(this.amount);
 
     // Initialize empty objects if !exists
     for (let i = 0; i < this.renderAmount; i++) {
       this.value[i] = this.value[i] || {};
+    }
+  },
+  methods: {
+    updateForm() {
+      this.$emit("input", this.value);
     }
   },
   components: {

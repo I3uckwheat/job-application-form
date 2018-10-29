@@ -6,6 +6,7 @@
 
     <v-flex xs12 sm6>
       <v-text-field
+        @blur="updateForm"
         label="Name"
         v-model="value.name">
       </v-text-field>
@@ -13,15 +14,17 @@
 
     <v-flex xs12 sm6>
       <v-text-field
+        @blur="updateForm"
         label="Phone Number"
         mask="phone"
         prepend-icon="phone"
-        v-model="value.phoneNumber">
+        v-model="value.phone">
       </v-text-field>
     </v-flex>
 
     <v-flex xs12 sm12>
       <v-text-field
+        @blur="updateForm"
         label="Address"
         v-model="value.address">
       </v-text-field>
@@ -38,6 +41,11 @@ export default {
     value: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    updateForm() {
+      this.$emit('input', this.value);
     }
   }
 };

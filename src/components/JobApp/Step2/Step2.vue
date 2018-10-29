@@ -2,8 +2,8 @@
   <v-form ref="form">
     <high-school-form v-model="highSchool" @input="updateInfo"></high-school-form>
     <undergrad-school-form v-model="undergrad" @input="updateInfo"></undergrad-school-form>
-    <past-employment-form v-model="pastEmployment" @input="updateInfo"></past-employment-form>
-    <!-- <references-form v-model="references" amount=1></references-form> -->
+    <!-- <past-employment-form v-model="pastEmployment" @input="updateInfo"></past-employment-form> -->
+    <references-form v-model="references" amount=3 @input="updateInfo"></references-form>
   </v-form>
  </template>
 
@@ -21,14 +21,14 @@ export default {
     this.applyToHighschoolForm(formData.education.fields.highSchool);
     this.applyToUndergradForm(formData.education.fields.undergraduate);
     this.applyToPastEmploymentForm(formData.employment.fields.jobs);
-    this.applyToReferencesForm(formData);
+    this.applyToReferencesForm(formData.additional.fields.references);
   },
   data() {
     return {
       highSchool: {},
       undergrad: {},
       pastEmployment: [],
-      references: []
+      references: {}
     };
   },
   methods: {
@@ -49,16 +49,13 @@ export default {
         ...this.undergrad
       };
 
-      const currentPastEmploymentData = currentData.employment.fields.jobs;
       currentData.employment.fields.jobs = [
         ...this.pastEmployment
       ];
 
-      // const currentReferencesData = currentData.additional.fields.references;
-      // currentData.additional.fields.references = {
-      //   ...currentReferencesData,
-      //   ...this.references
-      // };
+      currentData.additional.fields.references = {
+        ...this.references
+      };
 
       localStorage.setItem("trJobApplication", JSON.stringify(currentData));
     },
@@ -79,7 +76,9 @@ export default {
     applyToPastEmploymentForm(formData) {
       this.pastEmployment = formData;
     },
-    applyToReferencesForm() {}
+    applyToReferencesForm(formData) {
+      this.references = formData;
+    }
   },
   components: {
     HighSchoolForm,
