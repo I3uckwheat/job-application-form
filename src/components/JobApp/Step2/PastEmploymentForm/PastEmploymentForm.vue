@@ -8,6 +8,7 @@
       :employerNumber="index + 1"
       :class="{spaced: index !== value.length - 1}"
       v-model="value[index]"
+      @input="updateForm"
     ></past-employment>
 
     <app-add-block-button @click="addJob">Add Another Job</app-add-block-button>
@@ -28,9 +29,12 @@ export default {
     }
   },
   created() {
-    this.addJob();
+    if (this.value.length < 1) this.addJob();
   },
   methods: {
+    updateForm() {
+      this.$emit('input', this.value);
+    },
     addJob() {
       const tempValue = [...this.value, {}];
       this.$emit("input", tempValue);

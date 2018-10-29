@@ -6,6 +6,7 @@
         <!-- Top row -->
         <v-flex xs12 sm4>
           <v-text-field
+            @blur="updateForm"
             label="Employer"
             v-model="value.employer">
           </v-text-field>
@@ -13,6 +14,7 @@
 
         <v-flex xs12 sm4>
           <v-text-field
+            @blur="updateForm"
             label="Address"
             v-model="value.address">
           </v-text-field>
@@ -20,6 +22,7 @@
 
         <v-flex xs12 sm4>
           <v-text-field
+            @blur="updateForm"
             label="Phone Number"
             prepend-icon="phone"
             mask="phone"
@@ -30,6 +33,7 @@
         <!-- Second Row -->
         <v-flex xs12 sm4>
           <v-text-field
+            @blur="updateForm"
             label="Job Title"
             v-model="value.jobTitle">
           </v-text-field>
@@ -37,6 +41,7 @@
 
         <v-flex xs12 sm4>
           <v-text-field
+            @blur="updateForm"
             label="Supervisor"
             v-model="value.supervisor">
           </v-text-field>
@@ -44,6 +49,7 @@
 
         <v-flex xs12 sm4>
           <v-text-field
+            @blur="updateForm"
             label="Reason for Leaving"
             v-model="value.reasonForLeaving">
           </v-text-field>
@@ -52,6 +58,7 @@
         <!-- Third Row -->
         <v-flex xs6 sm6>
           <app-date-dialog
+            @blur="updateForm"
             label="Start Date"
             v-model="value.startDate"
           >
@@ -60,6 +67,7 @@
 
         <v-flex xs6 sm6>
           <app-date-dialog
+            @blur="updateForm"
             label="End Date"
             v-model="value.endDate"
           >
@@ -69,6 +77,7 @@
         <!-- Fourth Row -->
         <v-flex xs6 sm6>
           <v-text-field
+            @blur="updateForm"
             label="Starting Hourly Pay"
             prefix="$"
             v-model="value.startingPay">
@@ -77,6 +86,7 @@
 
         <v-flex xs6 sm6>
           <v-text-field
+            @blur="updateForm"
             label="Ending Hourly Pay"
             prefix="$"
             v-model="value.endingPay">
@@ -86,6 +96,7 @@
         <!-- Final Row -->
         <v-flex xs12 sm122>
           <v-textarea
+            @blur="updateForm"
             label="Work Peformed"
             v-model="value.workPeformed">
           </v-textarea>
@@ -108,6 +119,11 @@ export default {
       required: true,
       type: Object
     }
+  },
+  methods: {
+    updateForm() {
+      this.$emit('input', this.value);
+    },
   },
   components: {
     appDateDialog: DateDialog
