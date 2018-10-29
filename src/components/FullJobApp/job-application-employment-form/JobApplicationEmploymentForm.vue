@@ -133,8 +133,8 @@
                       <template slot-scope="{ save, cancel }">
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn flat color="secondary" @click="cancel">Cancel</v-btn>
-                          <v-btn flat color="primary" @click="save">OK</v-btn>
+                          <!-- <v-btn flat color="secondary" @click="cancel">Cancel</v-btn> -->
+                          <!-- <v-btn flat color="primary" @click="save">OK</v-btn> -->
                         </v-card-actions>
                       </template>
                     </v-date-picker>
@@ -165,8 +165,8 @@
                       <template slot-scope="{ save, cancel }">
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn flat color="secondary" @click="cancel">Cancel</v-btn>
-                          <v-btn flat color="primary" @click="save">OK</v-btn>
+                          <!-- <v-btn flat color="secondary" @click="cancel">Cancel</v-btn> -->
+                          <!-- <v-btn flat color="primary" @click="save">OK</v-btn> -->
                         </v-card-actions>
                       </template>
                     </v-date-picker>
