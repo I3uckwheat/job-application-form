@@ -2,7 +2,7 @@
   <v-form ref="form">
     <high-school-form v-model="highSchool" @input="updateInfo"></high-school-form>
     <undergrad-school-form v-model="undergrad" @input="updateInfo"></undergrad-school-form>
-    <!-- <past-employment-form v-model="pastEmployment" @input="updateInfo"></past-employment-form> -->
+    <past-employment-form v-model="pastEmployment" @input="updateInfo"></past-employment-form>
     <references-form v-model="references" amount=3 @input="updateInfo"></references-form>
   </v-form>
  </template>

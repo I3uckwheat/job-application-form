@@ -9,7 +9,9 @@
       :class="{spaced: index !== value.length - 1}"
       v-model="value[index]"
       @input="updateForm"
-    ></past-employment>
+    >
+      <delete-button v-if="index !== 0" @click="removeJob(index)">
+    </delete-button></past-employment>
 
     <app-add-block-button @click="addJob">Add Another Job</app-add-block-button>
 
@@ -20,6 +22,7 @@
 import Card from "../../shared/Card.vue";
 import AddBlockButton from "../../shared/AddBlockButton.vue";
 import PastEmployment from "./PastEmployment.vue";
+import DeleteButton from "../../../layout/DeleteButton.vue";
 
 export default {
   props: {
@@ -38,12 +41,18 @@ export default {
     addJob() {
       const tempValue = [...this.value, {}];
       this.$emit("input", tempValue);
+    },
+    removeJob(index) {
+      const tempValue = this.value;
+      tempValue.splice(index, 1);
+      this.$emit("input", tempValue);
     }
   },
   components: {
+    PastEmployment,
+    DeleteButton,
     appCard: Card,
     appAddBlockButton: AddBlockButton,
-    PastEmployment
   }
 };
 </script>
