@@ -15,7 +15,7 @@
         </v-text-field>
       </v-flex>
 
-      <v-flex xs4 class="my-2">
+      <v-flex xs4 class="my-3">
         <app-date-dialog
           label="Date of Signature"
           v-model="date"  
