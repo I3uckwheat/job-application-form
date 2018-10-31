@@ -94,32 +94,6 @@ export const state = {
           hourlyRateStarting: "",
           hourlyRateFinal: "",
           workPerformed: ""
-        },
-        {
-          employer: "",
-          address: "",
-          telephone: "",
-          jobTitle: "",
-          supervisor: "",
-          reasonForLeaving: "",
-          datesEmployedStart: null,
-          datesEmployedEnd: null,
-          hourlyRateStarting: "",
-          hourlyRateFinal: "",
-          workPerformed: ""
-        },
-        {
-          employer: "",
-          address: "",
-          telephone: "",
-          jobTitle: "",
-          supervisor: "",
-          reasonForLeaving: "",
-          datesEmployedStart: null,
-          datesEmployedEnd: null,
-          hourlyRateStarting: "",
-          hourlyRateFinal: "",
-          workPerformed: ""
         }
       ],
       activitiesAndOffice: ""
