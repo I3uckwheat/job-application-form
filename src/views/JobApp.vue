@@ -42,14 +42,33 @@ export default {
     }
   },
   methods: {
+
     submit() {
+      this.$swal({
+        title: "Submit Job Application?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Submit"
+      }).then(result => {
+        if (result.value === true) {
+          // this.submitJobApp();
+        }
+      })
+    },
+    submitJobApp() {
       jobAppService
         .create(JSON.parse(localStorage.getItem('trJobApplication')))
         .then(response => {
           jobAppService.createNotification();
+          window.location.replace('/');
         })
         .catch(e => {
           this.errors.push(e);
+          this.$swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong! Please try again later, your info will be saved for 3 days',
+          })
         });
     },
     setupLocalStorage() {
