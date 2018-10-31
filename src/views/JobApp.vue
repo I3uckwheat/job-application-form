@@ -84,6 +84,11 @@ export default {
     appFooter: Footer,
     appJobNav: JobNav,
     FullJobApp
+  },
+  beforeRouteUpdate(to, from, next) {
+    // scroll to the top of the page whenever route is changed
+    window.scrollTo(0, 0);
+    next();
   }
 };
 </script>
