@@ -23,8 +23,8 @@
       </v-text-field>
     </v-flex>
 
-  <v-layout>
-    <v-flex xs12 sm4>
+  <v-layout row wrap>
+    <v-flex xs12 sm6>
       <app-date-dialog 
         label="Date Available for Work" 
         @input="updateForm"
@@ -48,16 +48,16 @@
   </v-layout>
 
   <h4>Are you available to work:</h4>
-  <v-layout justify-start>
-    <v-flex xs2>
+  <v-layout wrap justify-start>
+    <v-flex sm3 xs12>
       <v-checkbox v-model="value.availabilityType" @change="updateForm" label="Full-Time" value="full-time"></v-checkbox>
     </v-flex>
 
-    <v-flex xs2>
+    <v-flex sm3 xs12>
       <v-checkbox v-model="value.availabilityType" @change="updateForm" label="Part-Time" value="part-time"></v-checkbox>
     </v-flex>
 
-    <v-flex xs2>
+    <v-flex sm3 xs12>
       <v-checkbox v-model="value.availabilityType" @change="updateForm" label="Temporary" value="temp"></v-checkbox>
     </v-flex>
   </v-layout>
