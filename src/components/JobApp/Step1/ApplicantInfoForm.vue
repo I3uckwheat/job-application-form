@@ -124,7 +124,7 @@
           @change="updateForm"
         >
           <v-layout justify-strt>
-            <v-flex xs2>
+            <v-flex xs5 sm3>
               <v-radio
                 label="Yes"
                 value="Y">
