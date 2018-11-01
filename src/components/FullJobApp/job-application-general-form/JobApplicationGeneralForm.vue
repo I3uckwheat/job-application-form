@@ -287,10 +287,12 @@
               <!-- Column 2: Best Contact Time Picker -->
               <v-flex xs12 md3>
                 <v-dialog
-                    v-model="modals.contactTime"
+                    ref="dialog"
+                    v-model="modals.contactTime.open"
                     lazy
                     :disabled="readOnly"
-                    full-width>
+                    width="300px"
+                  >
                   <v-text-field
                       slot="activator"
                       v-model="model.general.fields.contactTime"
@@ -300,15 +302,10 @@
                       readonly
                       required>
                   </v-text-field>
-                  <v-time-picker
-                      v-model="model.general.fields.contactTime"
-                      actions>
-                    <template slot-scope="{ save, cancel }">
-                      <v-card-actions>
-                        <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-                        <v-btn flat color="primary" @click="save">Save</v-btn>
-                      </v-card-actions>
-                    </template>
+                  <v-time-picker v-model="modals.contactTime.time">
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click="modals.contactTime.open = false">Cancel</v-btn>
+                    <v-btn flat color="primary" @click="save()">Save</v-btn>
                   </v-time-picker>
                 </v-dialog>
               </v-flex>
@@ -942,7 +939,10 @@ export default {
       rules: this.$store.state.vuetifyRules,
 
       modals: {
-        contactTime: false,
+        contactTime: {
+          open: false,
+          time: '00:00'
+        },
         hasFiledBeforeDate: false,
         wasEmployedBeforeDate: false,
         dateAvailable: false,
@@ -958,6 +958,11 @@ export default {
   methods: {
     isAvailableForShift(type) {
       return this.model.general.fields.availabilityType.includes(type);
+    },
+    save() {
+      // hacky becaues of poor decisions
+      this.$refs.dialog.save(this.modals.contactTime.time);
+      this.model.general.fields.contactTime = this.modals.contactTime.time;
     }
   },
 
